@@ -220,7 +220,7 @@ export default function Home() {
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="line-md:telegram" /> <a href='t.me/slonrobot' className='underline'>@slonrobot</a>
+                                            <Icon icon="line-md:telegram" /> <a href='https://t.me/slonrobot' className='underline'>@slonrobot</a>
                                         </div>
                                     </li>
                                 </ul>
