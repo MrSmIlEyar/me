@@ -11,6 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import {ParallaxProvider, Parallax} from 'react-scroll-parallax';
 import {useInView} from 'react-intersection-observer';
 import {Progress} from "@/components/ui/progress"
+import {MetrikaCounter} from "react-metrika";
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
@@ -77,7 +78,6 @@ export default function Home() {
                             </>
                         )}
                     </div>
-                    {/*<div className="h-1.5 bg-black rounded-2xl w-2/3"></div>*/}
                     <Progress value={progress} className="h-1.5 rounded-2xl"></Progress>
                     <div className='grid grid-cols-3 gap-10'>
                         {loading ? (
@@ -147,8 +147,8 @@ export default function Home() {
                             <Skeleton width={150}/>
                         ) : (
                             <a
-                                href='/resume.pdf'
-                                download='resume.pdf'
+                                href='/CV_Fullstack_Developer.pdf'
+                                download='CV_Fullstack_Developer.pdf'
                                 target='_blank'
                                 className='flex gap-2 bg-black text-white p-2 rounded-xl hover:bg-gray-800 fade-in'
                             >
@@ -303,6 +303,13 @@ export default function Home() {
                             <div className='flex-grow h-px bg-white'></div>
                         </div>
                         <div className="flex items-center justify-center">
+                            <MetrikaCounter
+                                id={98695129}
+                                options={{
+                                    trackHash: true,
+                                    webvisor: true
+                                }}
+                            />
                             <a href='https://github.com/MrSmIlEyar/me' target='_blank'
                                className="underline text-[10px]">
                                 source code
