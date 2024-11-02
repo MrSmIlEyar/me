@@ -3,7 +3,6 @@
 import React, {useState, useEffect} from 'react';
 import {Download, Github, Mail} from 'lucide-react';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
-import {Title} from '@/components/ui/title';
 import {Icon} from '@iconify/react';
 import {HoverCard, HoverCardContent, HoverCardTrigger} from '@/components/ui/hover-card';
 import Skeleton from 'react-loading-skeleton';
@@ -12,6 +11,7 @@ import {ParallaxProvider, Parallax} from 'react-scroll-parallax';
 import {useInView} from 'react-intersection-observer';
 import {Progress} from "@/components/ui/progress"
 import {MetrikaCounter} from "react-metrika";
+import {TypeAnimation} from "react-type-animation";
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
@@ -29,10 +29,8 @@ export default function Home() {
         return () => clearTimeout(timer);
     }, []);
 
-
     const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
+        threshold: 1,
     });
 
     return (
@@ -43,8 +41,8 @@ export default function Home() {
                         <Skeleton circle width={200} height={200}/>
                     ) : (
                         <Parallax>
-                            <Avatar className='w-[200px] h-[200px] border-2 border-gray fade-in'>
-                                <AvatarImage src='https://i.postimg.cc/KvKS1yXx/img.png' width={250} height={1500}/>
+                            <Avatar className='w-[200px] h-[200px] border-2 border-gray-200 fade-in'>
+                                <AvatarImage src='https://i.postimg.cc/90yLsQ2y/Picsart-24-11-02-23-55-46-822.png' width={250} height={1500}/>
                                 <AvatarFallback>ЕЯ</AvatarFallback>
                             </Avatar>
                         </Parallax>
@@ -52,7 +50,20 @@ export default function Home() {
                     {loading ? (
                         <Skeleton width={200}/>
                     ) : (
-                        <Title text='Fullstack Developer' className='fade-in'/>
+                        <div className='text-xl font-bold flex justify-center w-[5]'>
+                            <TypeAnimation
+                                sequence={[
+                                    'Efremov Yaroslav',
+                                    1000,
+                                    'Grach',
+                                    1000,
+                                    'Fullstack Developer',
+                                    1000,
+                                ]}
+                                speed={50}
+                                repeat={Infinity}
+                            />
+                        </div>
                     )}
                     <div className='grid grid-cols-3 gap-x-10 gap-y-5'>
                         {loading ? (
@@ -78,7 +89,7 @@ export default function Home() {
                             </>
                         )}
                     </div>
-                    <Progress value={progress} className="h-1.5 rounded-2xl"></Progress>
+                    <Progress value={progress} className="h-1.5 rounded-2xl max-w-24"></Progress>
                     <div className='grid grid-cols-3 gap-10'>
                         {loading ? (
                             <>
@@ -183,10 +194,10 @@ export default function Home() {
                         </div>
                         <div className='flex gap-2 items-center justify-start text-sm'>
                             <Icon icon="material-symbols:work"/>
-                            <p>Интернетика (Middle React Native)</p>
+                            <p>Интернетика (Middle React)</p>
                         </div>
                         <p>
-                            Я - Fullstack Developer с опытом работы в различных проектах.
+                            Я - Fullstack разработчик с опытом работы в различных проектах.
                             Специализируюсь на разработке веб-приложений с использованием
                             современных технологий, таких как React, TypeScript, Django, SQL, Docker и Nginx.
                         </p>
@@ -199,34 +210,35 @@ export default function Home() {
                         </div>
                         <ul className='space-y-4'>
                             <li className='space-y-3'>
-                                <div className='flex gap-2 items-center'>
+                                <div className='flex gap-2 items-center font-bold'>
                                     <Icon icon="octicon:dot-16"/>SLON
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info" /> Телеграмм бот арбитража рекламы
+                                            <Icon icon="icomoon-free:info"/> Телеграмм бот арбитража рекламы
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                        <Icon icon="formkit:datetime"/> Август 2023 - Апрель 2024
+                                            <Icon icon="formkit:datetime"/> Август 2023 - Апрель 2024
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction" /> aiogram, Bash, SQL
+                                            <Icon icon="icon-park-outline:instruction"/> aiogram, Bash, SQL
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="line-md:telegram" /> <a href='https://t.me/slonrobot' className='underline'>@slonrobot</a>
+                                            <Icon icon="line-md:telegram"/> <a href='https://t.me/slonrobot'
+                                                                               className='underline'>@slonrobot</a>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
                             <li className='space-y-3'>
-                                <div className='flex gap-2 items-center'>
+                                <div className='flex gap-2 items-center font-bold'>
                                     <Icon icon="octicon:dot-16"/>THX Bot Group
                                 </div>
                                 <ul className='ml-6 space-y-1'>
@@ -248,7 +260,7 @@ export default function Home() {
                                 </ul>
                             </li>
                             <li className='space-y-3'>
-                                <div className='flex gap-2 items-center'>
+                                <div className='flex gap-2 items-center font-bold'>
                                     <Icon icon="octicon:dot-16"/>Megamailer
                                 </div>
                                 <ul className='ml-6 space-y-1'>
@@ -264,19 +276,20 @@ export default function Home() {
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> Django, Flask, React, SQL, Docker
+                                            <Icon icon="icon-park-outline:instruction"/> Django, Flask, React, SQL,
+                                            Docker
                                         </div>
                                     </li>
                                 </ul>
                             </li>
                             <li className='space-y-3'>
-                                <div className='flex gap-2 items-center'>
+                                <div className='flex gap-2 items-center font-bold'>
                                     <Icon icon="octicon:dot-16"/>Интернетика
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex items-baseline gap-2 text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Студия разработки Android и IOS приложений
+                                            <Icon icon="icomoon-free:info"/> Студия разработки приложений для бизнеса
                                         </div>
                                     </li>
                                     <li>
@@ -286,21 +299,62 @@ export default function Home() {
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> React Native
+                                            <Icon icon="icon-park-outline:instruction"/> React
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="material-symbols:link" /> <a href='https://internetika.dev/'
-                                                                               className='underline'>Сайт компании</a>
+                                            <Icon icon="material-symbols:link"/> <a href='https://internetika.dev/'
+                                                                                    className='underline'>Сайт
+                                            компании</a>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-
+                    </div>
+                </Parallax>
+            </div>
+            <div className="bg-white">
+                <Parallax>
+                    <div className="grid gap-3 p-5">
+                        <div className="flex items-center">
+                            <div className="flex-grow h-px bg-black"></div>
+                            <div className="flex-shrink text-2xl text-black px-4 font-light">
+                                <h2 className='text-2xl font-bold'>Хобби</h2>
+                            </div>
+                            <div className="flex-grow h-px bg-black"></div>
+                        </div>
+                        <ul className='space-y-4'>
+                            <li className='space-y-3'>
+                                <div className='flex gap-2 items-center font-bold'>
+                                    <Icon icon="octicon:dot-16"/>Шахматы
+                                </div>
+                                <ul className='ml-6 space-y-1'>
+                                    <li>
+                                        <div className='flex gap-2 items-center text-sm'>
+                                            <Icon icon="simple-icons:lichess"/> <a
+                                            href='https://lichess.org/@/Mr_Smile_XD' className='underline'>Профиль на
+                                            Lichess</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className='space-y-3'>
+                                <div className='flex gap-2 items-center font-bold'>
+                                    <Icon icon="octicon:dot-16"/>Сборка Кубика Рубика
+                                </div>
+                                <ul className='ml-6 space-y-1'>
+                                    <li>
+                                        <div className='flex gap-2 items-center text-sm'>
+                                            <Icon icon="icomoon-free:info"/> Рекордное время: 28 секунд
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                         <div className="flex items-center h-1.5">
-                            <div className='flex-grow h-px bg-white'></div>
+                            <div className='flex-grow h-px bg-black'></div>
                         </div>
                         <div className="flex items-center justify-center">
                             <MetrikaCounter
