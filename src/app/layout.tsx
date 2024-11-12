@@ -9,8 +9,8 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "me",
-    description: "page about Efremov Yaroslav ефремов ярослав fullstack developer фуллстэк разработчик страница визитка",
+    title: "Grach",
+    description: "Ефремов Ярослав \n Визитка Fullstack разработчика",
 };
 
 export default function RootLayout({

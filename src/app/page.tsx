@@ -12,10 +12,15 @@ import {useInView} from 'react-intersection-observer';
 import {Progress} from "@/components/ui/progress"
 import {MetrikaCounter} from "react-metrika";
 import {TypeAnimation} from "react-type-animation";
+import LanguageSwitcher from "@/components/shared/LanguageSwitcher";
+import '@/i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0)
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         const timer = setTimeout(() => setProgress(100), 200)
@@ -177,34 +182,35 @@ export default function Home() {
             <div className="mt-2 bg-black min-h-screen">
                 <Parallax>
                     <div ref={ref} className={`grid gap-3 bg-black text-white p-5 ${inView ? 'fade-in' : ''}`}>
+                        <div className='sticky flex top-2 z-10 justify-center'>
+                            <LanguageSwitcher className='sticky top-0'/>
+                        </div>
                         <div className="flex items-center">
                             <div className="flex-grow h-px bg-white"></div>
                             <div className="flex-shrink text-2xl text-white px-4 font-light">
-                                <h2 className='text-2xl font-bold'>О себе</h2>
+                                <h2 className='text-2xl font-bold'>{t('AboutMeTitle')}</h2>
                             </div>
                             <div className="flex-grow h-px bg-white"></div>
                         </div>
                         <div className='flex gap-2 items-center justify-start text-sm'>
                             <Icon icon="mdi:location" className='fade-in'/>
-                            <p>Казань</p>
+                            <p>{t('City')}</p>
                         </div>
                         <div className='flex gap-2 items-center justify-start text-sm'>
                             <Icon icon="tdesign:education"/>
-                            <p>КФУ ИТИС (2 курс)</p>
+                            <p>{t('University')}</p>
                         </div>
                         <div className='flex gap-2 items-center justify-start text-sm'>
                             <Icon icon="material-symbols:work"/>
-                            <p>Интернетика (Middle React)</p>
+                            <p>{t('Work')}</p>
                         </div>
                         <p>
-                            Я - Fullstack разработчик с опытом работы в различных проектах.
-                            Специализируюсь на разработке веб-приложений с использованием
-                            современных технологий, таких как React, TypeScript, Django, SQL, Docker и Nginx.
+                            {t('AboutMe')}
                         </p>
                         <div className="flex items-center">
                             <div className="flex-grow h-px bg-white"></div>
                             <div className="flex-shrink text-2xl text-white px-4 font-light">
-                                <h2 className='text-2xl font-bold'>Карьера</h2>
+                                <h2 className='text-2xl font-bold'>{t('Career')}</h2>
                             </div>
                             <div className="flex-grow h-px bg-white"></div>
                         </div>
@@ -216,12 +222,12 @@ export default function Home() {
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Телеграмм бот арбитража рекламы
+                                            <Icon icon="icomoon-free:info"/> {t('SlonAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> Август 2023 - Апрель 2024
+                                            <Icon icon="formkit:datetime"/> {t('SlonTime')}
                                         </div>
                                     </li>
                                     <li>
@@ -244,12 +250,12 @@ export default function Home() {
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Студия разработки Web App Telegram
+                                            <Icon icon="icomoon-free:info"/> {t('THXAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> Август 2023 - Апрель 2024
+                                            <Icon icon="formkit:datetime"/> {t('THXTime')}
                                         </div>
                                     </li>
                                     <li>
@@ -266,12 +272,12 @@ export default function Home() {
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Настройка рассылок по email
+                                            <Icon icon="icomoon-free:info"/> {t('MegamailerAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> Апрель 2024 - Август 2024
+                                            <Icon icon="formkit:datetime"/> {t('MegamailerTime')}
                                         </div>
                                     </li>
                                     <li>
@@ -284,17 +290,17 @@ export default function Home() {
                             </li>
                             <li className='space-y-3'>
                                 <div className='flex gap-2 items-center font-bold'>
-                                    <Icon icon="octicon:dot-16"/>Интернетика
+                                    <Icon icon="octicon:dot-16"/>{t('Internetika')}
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
-                                        <div className='flex items-baseline gap-2 text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Студия разработки приложений для бизнеса
+                                        <div className='flex items-center gap-2 text-sm'>
+                                            <Icon icon="icomoon-free:info"/> {t('InternetikaAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> Октябрь 2024 - настоящее время
+                                            <Icon icon="formkit:datetime"/> {t('InternetikaTime')}
                                         </div>
                                     </li>
                                     <li>
@@ -305,8 +311,7 @@ export default function Home() {
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
                                             <Icon icon="material-symbols:link"/> <a href='https://internetika.dev/'
-                                                                                    className='underline'>Сайт
-                                            компании</a>
+                                                                                    className='underline'>{t('InternetikaLink')}</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -321,33 +326,32 @@ export default function Home() {
                         <div className="flex items-center">
                             <div className="flex-grow h-px bg-black"></div>
                             <div className="flex-shrink text-2xl text-black px-4 font-light">
-                                <h2 className='text-2xl font-bold'>Хобби</h2>
+                                <h2 className='text-2xl font-bold'>{t('Hobby')}</h2>
                             </div>
                             <div className="flex-grow h-px bg-black"></div>
                         </div>
                         <ul className='space-y-4'>
                             <li className='space-y-3'>
                                 <div className='flex gap-2 items-center font-bold'>
-                                    <Icon icon="octicon:dot-16"/>Шахматы
+                                    <Icon icon="octicon:dot-16"/>{t('Chess')}
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
                                             <Icon icon="simple-icons:lichess"/> <a
-                                            href='https://lichess.org/@/Mr_Smile_XD' className='underline'>Профиль на
-                                            Lichess</a>
+                                            href='https://lichess.org/@/Mr_Smile_XD' className='underline'>{t('ChessAbout')}</a>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
                             <li className='space-y-3'>
                                 <div className='flex gap-2 items-center font-bold'>
-                                    <Icon icon="octicon:dot-16"/>Сборка Кубика Рубика
+                                    <Icon icon="octicon:dot-16"/>{t('RubiksCube')}
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> Рекордное время: 28 секунд
+                                            <Icon icon="icomoon-free:info"/> {t('RubiksCubeTime')}
                                         </div>
                                     </li>
                                 </ul>
@@ -356,7 +360,7 @@ export default function Home() {
                         <div className="flex items-center h-1.5">
                             <div className='flex-grow h-px bg-black'></div>
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-center gap-10">
                             <MetrikaCounter
                                 id={98695129}
                                 options={{
@@ -365,8 +369,15 @@ export default function Home() {
                                 }}
                             />
                             <a href='https://github.com/MrSmIlEyar/me' target='_blank'
-                               className="underline text-[10px]">
-                                source code
+                               className="underline text-[12px] flex gap-1 justify-center items-center">
+                                    source code
+                            </a>
+                            <a onClick={() => {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                })
+                            }} className="underline text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center">back to top
                             </a>
                         </div>
                     </div>
