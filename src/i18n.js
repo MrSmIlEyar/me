@@ -25,6 +25,8 @@ const resources = {
             ChessAbout: 'Profile on Lichess',
             RubiksCube: 'Rubik\'s Cube',
             RubiksCubeTime: 'Record time: 28 seconds',
+            Quotes: 'Quotes',
+            NewQuote: 'New Quote',
         },
     },
     ru: {
@@ -50,6 +52,8 @@ const resources = {
             ChessAbout: 'Профиль на Lichess',
             RubiksCube: 'Сборка Кубика Рубика',
             RubiksCubeTime: 'Рекордное время: 28 секунд',
+            Quotes: 'Цитаты',
+            NewQuote: 'Новая цитата'
         },
     },
 };

@@ -14,13 +14,14 @@ import {MetrikaCounter} from "react-metrika";
 import {TypeAnimation} from "react-type-animation";
 import LanguageSwitcher from "@/components/shared/LanguageSwitcher";
 import '@/i18n';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import Quote from "@/components/shared/Quote";
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0)
+    const [progress, setProgress] = useState(0);
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     useEffect(() => {
         const timer = setTimeout(() => setProgress(100), 200)
@@ -33,6 +34,7 @@ export default function Home() {
         }, 1000);
         return () => clearTimeout(timer);
     }, []);
+
 
     const [ref, inView] = useInView({
         threshold: 1,
@@ -47,7 +49,8 @@ export default function Home() {
                     ) : (
                         <Parallax>
                             <Avatar className='w-[200px] h-[200px] border-2 border-gray-200 fade-in'>
-                                <AvatarImage src='https://i.postimg.cc/90yLsQ2y/Picsart-24-11-02-23-55-46-822.png' width={250} height={1500}/>
+                                <AvatarImage src='https://i.postimg.cc/90yLsQ2y/Picsart-24-11-02-23-55-46-822.png'
+                                             width={250} height={1500}/>
                                 <AvatarFallback>ЕЯ</AvatarFallback>
                             </Avatar>
                         </Parallax>
@@ -339,7 +342,8 @@ export default function Home() {
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
                                             <Icon icon="simple-icons:lichess"/> <a
-                                            href='https://lichess.org/@/Mr_Smile_XD' className='underline'>{t('ChessAbout')}</a>
+                                            href='https://lichess.org/@/Mr_Smile_XD'
+                                            className='underline'>{t('ChessAbout')}</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -357,6 +361,16 @@ export default function Home() {
                                 </ul>
                             </li>
                         </ul>
+                        <div className="flex items-center">
+                            <div className="flex-grow h-px bg-black"></div>
+                            <div className="flex-shrink text-2xl text-black px-4 font-light">
+                                <h2 className='text-2xl font-bold'>{t('Quotes')}</h2>
+                            </div>
+                            <div className="flex-grow h-px bg-black"></div>
+                        </div>
+                        <div className="min-w-full">
+                            <Quote/>
+                        </div>
                         <div className="flex items-center h-1.5">
                             <div className='flex-grow h-px bg-black'></div>
                         </div>
@@ -370,14 +384,16 @@ export default function Home() {
                             />
                             <a href='https://github.com/MrSmIlEyar/me' target='_blank'
                                className="underline text-[12px] flex gap-1 justify-center items-center">
-                                    source code
+                                source code
                             </a>
                             <a onClick={() => {
                                 window.scrollTo({
                                     top: 0,
                                     behavior: "smooth",
                                 })
-                            }} className="underline text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center">back to top
+                            }}
+                               className="underline text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center">back
+                                to top
                             </a>
                         </div>
                     </div>
