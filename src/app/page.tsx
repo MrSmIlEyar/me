@@ -20,14 +20,17 @@ import Quote from "@/components/shared/Quote";
 export default function Home() {
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
+    const [isSticky, setIsSticky] = useState(false);
 
     const {t} = useTranslation();
 
+    // хук под прогресс бар
     useEffect(() => {
         const timer = setTimeout(() => setProgress(100), 200)
         return () => clearTimeout(timer);
     }, []);
 
+    // хук под загрузку
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
@@ -35,9 +38,20 @@ export default function Home() {
         return () => clearTimeout(timer);
     }, []);
 
+    // хук под перемещение LanguageSwitcher
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.pageYOffset;
+            setIsSticky(scrollPosition > window.innerHeight);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const [ref, inView] = useInView({
         threshold: 1,
+        delay: 1,
     });
 
     return (
@@ -177,7 +191,7 @@ export default function Home() {
                         {loading ? (
                             <Skeleton circle width={25} height={25}/>
                         ) : (
-                            <Icon icon="simple-line-icons:arrow-down" className="font-bold"/>
+                            <Icon icon="simple-line-icons:arrow-down" className="font-bold animate-bounce"/>
                         )}
                     </div>
                 </div>
@@ -185,8 +199,8 @@ export default function Home() {
             <div className="mt-2 bg-black min-h-screen">
                 <Parallax>
                     <div ref={ref} className={`grid gap-3 bg-black text-white p-5 ${inView ? 'fade-in' : ''}`}>
-                        <div className='sticky flex top-2 z-10 justify-center'>
-                            <LanguageSwitcher className='sticky top-0'/>
+                        <div className={`langDiv sticky flex top-2 z-10 transition duration-1000 ease-in-out ${isSticky ? `justify-end` : 'justify-center'}`}>
+                            <LanguageSwitcher />
                         </div>
                         <div className="flex items-center">
                             <div className="flex-grow h-px bg-white"></div>

@@ -16,7 +16,7 @@ const LanguageSwitcher:React.FC<Props> = (className) => {
     };
 
     return (
-        <div className={cn(className, 'flex justify-center items-center gap-5 backdrop-blur-lg rounded-xl p-2 border-white border')}>
+        <div className={cn(className, 'flex justify-center items-center gap-1 backdrop-blur-lg rounded-xl p-1 border-white border text-[12px]')}>
             <button
                 onClick={() => changeLanguage('ru')}
                 style={{
@@ -24,9 +24,9 @@ const LanguageSwitcher:React.FC<Props> = (className) => {
                     color: currentLanguage === 'ru' ? 'black' : '',
                     border: currentLanguage === 'ru' ? '1px solid black' : '',
                 }}
-                className='p-1 rounded-lg'
+                className='px-1 rounded-lg'
             >
-                Ru
+                ru
             </button>
             <button
                 onClick={() => changeLanguage('en')}
@@ -35,9 +35,9 @@ const LanguageSwitcher:React.FC<Props> = (className) => {
                     color: currentLanguage === 'en' ? 'black' : '',
                     border: currentLanguage === 'en' ? '1px solid black' : '',
                 }}
-                className='p-1 rounded-lg'
+                className='px-1 rounded-lg'
             >
-                En
+                en
             </button>
         </div>
     );
