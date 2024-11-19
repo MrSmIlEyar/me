@@ -81,6 +81,8 @@ export default function Home() {
                                     1000,
                                     'Fullstack Developer',
                                     1000,
+                                    'Dyva (G-Group)',
+                                    1000,
                                 ]}
                                 speed={50}
                                 repeat={Infinity}
@@ -239,7 +241,7 @@ export default function Home() {
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> {t('SlonAbout')}
+                                            <Icon icon="icomoon-free:info" className="flex-shrink-0"/> {t('SlonAbout')}
                                         </div>
                                     </li>
                                     <li>
@@ -248,8 +250,18 @@ export default function Home() {
                                         </div>
                                     </li>
                                     <li>
-                                        <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> aiogram, Bash, SQL
+                                        <div className='flex gap-2 items-baseline text-sm'>
+                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0" />
+                                            <div className='grid gap-1'>
+                                                <div className='flex gap-2'>
+                                                    <p>Backend: </p>
+                                                    <p>Bash, aiogram</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>DB-system: </p>
+                                                    <p>MariaDB, Prisma</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </li>
                                     <li>
@@ -267,17 +279,18 @@ export default function Home() {
                                 <ul className='ml-6 space-y-1'>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> {t('THXAbout')}
+                                            <Icon icon="icomoon-free:info" className="flex-shrink-0"/> {t('THXAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> {t('THXTime')}
+                                            <Icon icon="formkit:datetime" className="flex-shrink-0"/> {t('THXTime')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> FastAPI, aiogram
+                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0"/>
+                                            {t('THXStack')}
                                         </div>
                                     </li>
                                 </ul>
@@ -288,19 +301,36 @@ export default function Home() {
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
-                                        <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icomoon-free:info"/> {t('MegamailerAbout')}
+                                        <div className='flex gap-2 items-baseline text-sm'>
+                                            <Icon icon="icomoon-free:info" className="flex-shrink-0"/> {t('MegamailerAbout')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="formkit:datetime"/> {t('MegamailerTime')}
+                                            <Icon icon="formkit:datetime" className="flex-shrink-0"/> {t('MegamailerTime')}
                                         </div>
                                     </li>
                                     <li>
-                                        <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> Django, Flask, React, SQL,
-                                            Docker
+                                        <div className='flex gap-2 items-baseline text-sm'>
+                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0"/>
+                                            <div className='grid gap-1'>
+                                                <div className='flex gap-2'>
+                                                    <p>Backend: </p>
+                                                    <p>Django, Flask</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>Frontend:</p>
+                                                    <p>React</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>DB-system: </p>
+                                                    <p>PostgreSQL, MySQL</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>Deployment:</p>
+                                                    <p>Docker</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
@@ -311,7 +341,7 @@ export default function Home() {
                                 </div>
                                 <ul className='ml-6 space-y-1'>
                                     <li>
-                                        <div className='flex items-center gap-2 text-sm'>
+                                        <div className='flex items-baseline gap-2 text-sm'>
                                             <Icon icon="icomoon-free:info"/> {t('InternetikaAbout')}
                                         </div>
                                     </li>
@@ -322,13 +352,63 @@ export default function Home() {
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
-                                            <Icon icon="icon-park-outline:instruction"/> React
+                                        <Icon icon="icon-park-outline:instruction"/> {t('InternetikaStack')}
                                         </div>
                                     </li>
                                     <li>
                                         <div className='flex gap-2 items-center text-sm'>
                                             <Icon icon="material-symbols:link"/> <a href='https://internetika.dev/'
                                                                                     className='underline'>{t('InternetikaLink')}</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className='space-y-3'>
+                                <div className='flex gap-2 items-center font-bold'>
+                                    <Icon icon="octicon:dot-fill-16"/>{t('Dyva')}
+                                </div>
+                                <ul className='ml-6 space-y-1'>
+                                    <li>
+                                        <div className='flex md:items-center gap-2 items-baseline text-sm'>
+                                            <Icon icon="icomoon-free:info" className="flex-shrink-0"/>
+                                            <div className="flex-1 leading-tight">
+                                                <p>{t('DyvaAbout')}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className='flex gap-2 items-center text-sm'>
+                                            <Icon icon="formkit:datetime"/>
+                                            <p>{t('DyvaTime')}</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className='flex gap-2 items-start text-sm'>
+                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0"/>
+                                            <div className='grid gap-1'>
+                                                <div className='flex gap-2'>
+                                                    <p>Backend: </p>
+                                                    <p>Django, Redis, Memcached, Celery, OpenAPI</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>Frontend:</p>
+                                                    <p>TypeScript, React, NextJS</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>DB-system: </p>
+                                                    <p>PostgreSQL, S3</p>
+                                                </div>
+                                                <div className='flex gap-2'>
+                                                    <p>Deployment:</p>
+                                                    <p>Kubernetes, Helm, Docker, Gitlab CI/CD</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className='flex gap-2 items-center text-sm'>
+                                            <Icon icon="material-symbols:link"/> <a href='https://dyva.site/'
+                                                                                    className='underline'>{t('DyvaLink')}</a>
                                         </div>
                                     </li>
                                 </ul>
