@@ -4,10 +4,11 @@ import {initReactI18next} from 'react-i18next';
 const resources = {
     en: {
         translation: {
+            currentLanguage: 'en',
             AboutMeTitle: 'About me',
             City: 'Kazan',
             University: 'KFU ITIS (2\'nd year)',
-            Work: 'Dyva (Fullstack Developer)',
+            Work: 'DyVa (Fullstack Developer)',
             AboutMe: 'I am a Fullstack developer with experience in various projects. I specialize in developing web applications using modern technologies such as React, TypeScript, Django, SQL, Docker and Nginx.',
             Career: 'Career',
             SlonAbout: 'Telegram bot for ads in channels',
@@ -28,7 +29,7 @@ const resources = {
             InternetikaTime: 'October 2024 - now',
             InternetikaStack: 'Frontend: React',
             InternetikaLink: 'Company site',
-            Dyva: 'Dyva (G-Group)',
+            Dyva: 'DyVa (G-Group)',
             DyvaAbout: 'A product that provides developers with a tool for tracking and dynamically changing prices in the real estate market',
             DyvaTime: 'November 2024 - now',
             DyvaStack: 'Backend: Django, Redis, Memcached, Celery, OpenAPI\n' +
@@ -47,10 +48,11 @@ const resources = {
     },
     ru: {
         translation: {
+            currentLanguage: 'ru',
             AboutMeTitle: 'О себе',
             City: 'Казань',
             University: 'КФУ ИТИС (2 курс)',
-            Work: 'Dyva (Fullstack разработчик)',
+            Work: 'DyVa (Fullstack разработчик)',
             AboutMe: 'Я - Fullstack разработчик с опытом работы в различных проектах. Специализируюсь на разработке веб-приложений с использованием современных технологий, таких как React, TypeScript, Django, SQL, Docker и Nginx.',
             Career: 'Карьера',
             SlonAbout: 'Телеграмм бот для рекламы в каналах',
@@ -59,6 +61,7 @@ const resources = {
                 'DB-system: MariaDB, Prisma',
             THXAbout: 'Студия разработки Web App Telegram',
             THXTime: 'Декабрь 2023 - Март 2024',
+            THXStack: 'Backend: FastAPI, aiogram',
             MegamailerAbout: 'Настройка рассылок по email для компаний',
             MegamailerTime: 'Апрель 2024 - Август 2024',
             Internetika: 'Интернетика',
@@ -70,7 +73,7 @@ const resources = {
                 'DB-system: PostgreSQL, MySQL\n' +
                 'Deployment: Docker',
             InternetikaLink: 'Сайт компании',
-            Dyva: 'Dyva (G-Group)',
+            Dyva: 'DyVa (G-Group)',
             DyvaAbout: 'Продукт, предоставляющий застройщикам инструмент для динамического ценообразования на рынке недвижимости',
             DyvaTime: 'Ноябрь 2024 - настоящее время',
             DyvaStack: 'Backend: Django, Redis, Memcached, Celery, OpenAPI\n' +

@@ -81,7 +81,7 @@ export default function Home() {
                                     1000,
                                     'Fullstack Developer',
                                     1000,
-                                    'Dyva (G-Group)',
+                                    'DyVa (G-Group)',
                                     1000,
                                 ]}
                                 speed={50}
@@ -198,7 +198,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className="mt-2 bg-black min-h-screen">
+            <div className="mt-2 bg-black">
                 <Parallax>
                     <div ref={ref} className={`grid gap-3 bg-black text-white p-5 ${inView ? 'fade-in' : ''}`}>
                         <div className={`langDiv sticky flex top-2 z-10 transition duration-1000 ease-in-out ${isSticky ? `justify-end` : 'justify-center'}`}>
@@ -463,7 +463,7 @@ export default function Home() {
                             <div className="flex-grow h-px bg-black"></div>
                         </div>
                         <div className="min-w-full">
-                            <Quote/>
+                            <Quote />
                         </div>
                         <div className="flex items-center h-1.5">
                             <div className='flex-grow h-px bg-black'></div>
