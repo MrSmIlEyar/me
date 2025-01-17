@@ -66,7 +66,7 @@ const resources = {
             MegamailerTime: 'Апрель 2024 - Август 2024',
             Internetika: 'Интернетика',
             InternetikaAbout: 'Студия разработки приложений для бизнеса',
-            InternetikaTime: 'Октябрь 2024 - натсоящее время',
+            InternetikaTime: 'Октябрь 2024 - настоящее время',
             InternetikaStack: 'Frontend: React',
             MegamailerStack: 'Backend: Django, Flask\n' +
                 'Frontend: React\n' +
