@@ -98,7 +98,7 @@ const GlassBackground: React.FC = () => {
     }
 
     return (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-20 grayscale contrast-125">
             {iconStates.map((state, index) => (
                 <motion.div
                     key={index}

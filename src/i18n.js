@@ -7,7 +7,6 @@ const resources = {
             currentLanguage: 'en',
             AboutMeTitle: 'About me',
             City: 'Kazan',
-            University: 'KFU ITIS (2\'nd year)',
             Work: 'DyVa (Fullstack Developer)',
             AboutMe: 'I am a Fullstack developer with experience in various projects. I specialize in developing web applications using modern technologies such as React, TypeScript, Django, SQL, Docker and Nginx.',
             Career: 'Career',
@@ -15,20 +14,12 @@ const resources = {
             SlonTime: 'August 2023 - April 2024',
             SlonStack: 'Backend: aiogram, Bash\n' +
                 'DB-system: MariaDB, Prisma',
-            THXAbout: 'Studio for developing Web Apps Telegram',
-            THXTime: 'December 2023 - March 2024',
-            THXStack: 'Backend: FastAPI, aiogram',
             MegamailerAbout: 'Setting sender by email for companies',
             MegamailerTime: 'April 2024 - August 2024',
             MegamailerStack: 'Backend: Django, Flask\n' +
                 'Frontend: React\n' +
                 'DB-system: PostgreSQL, MySQL\n' +
                 'Deployment: Docker',
-            Internetika: 'Internetika',
-            InternetikaAbout: 'Studio of developing apps for business',
-            InternetikaTime: 'October 2024 - now',
-            InternetikaStack: 'Frontend: React',
-            InternetikaLink: 'Company site',
             Dyva: 'DyVa (G-Group)',
             DyvaAbout: 'A product that provides developers with a tool for tracking and dynamically changing prices in the real estate market',
             DyvaTime: 'November 2024 - now',
@@ -42,6 +33,9 @@ const resources = {
             ChessAbout: 'Profile on Lichess',
             RubiksCube: 'Rubik\'s Cube',
             RubiksCubeTime: 'Record time: 28 seconds',
+            YrStore: 'yr-store.ru',
+            YrStoreAbout: 'My pet project — an online store',
+            YrStoreLink: 'Visit the store',
             Quotes: 'Quotes',
             NewQuote: 'New Quote',
         },
@@ -51,7 +45,6 @@ const resources = {
             currentLanguage: 'ru',
             AboutMeTitle: 'О себе',
             City: 'Казань',
-            University: 'КФУ ИТИС (2 курс)',
             Work: 'DyVa (Fullstack разработчик)',
             AboutMe: 'Я - Fullstack разработчик с опытом работы в различных проектах. Специализируюсь на разработке веб-приложений с использованием современных технологий, таких как React, TypeScript, Django, SQL, Docker и Nginx.',
             Career: 'Карьера',
@@ -59,20 +52,12 @@ const resources = {
             SlonTime: 'Август 2023 - Апрель 2024',
             SlonStack: 'Backend: aiogram, Bash\n' +
                 'DB-system: MariaDB, Prisma',
-            THXAbout: 'Студия разработки Web App Telegram',
-            THXTime: 'Декабрь 2023 - Март 2024',
-            THXStack: 'Backend: FastAPI, aiogram',
             MegamailerAbout: 'Настройка рассылок по email для компаний',
             MegamailerTime: 'Апрель 2024 - Август 2024',
-            Internetika: 'Интернетика',
-            InternetikaAbout: 'Студия разработки приложений для бизнеса',
-            InternetikaTime: 'Октябрь 2024 - настоящее время',
-            InternetikaStack: 'Frontend: React',
             MegamailerStack: 'Backend: Django, Flask\n' +
                 'Frontend: React\n' +
                 'DB-system: PostgreSQL, MySQL\n' +
                 'Deployment: Docker',
-            InternetikaLink: 'Сайт компании',
             Dyva: 'DyVa (G-Group)',
             DyvaAbout: 'Продукт, предоставляющий застройщикам инструмент для динамического ценообразования на рынке недвижимости',
             DyvaTime: 'Ноябрь 2024 - настоящее время',
@@ -86,6 +71,9 @@ const resources = {
             ChessAbout: 'Профиль на Lichess',
             RubiksCube: 'Сборка Кубика Рубика',
             RubiksCubeTime: 'Рекордное время: 28 секунд',
+            YrStore: 'yr-store.ru',
+            YrStoreAbout: 'Мой пет-проект — интернет-магазин',
+            YrStoreLink: 'Перейти в магазин',
             Quotes: 'Цитаты',
             NewQuote: 'Новая цитата'
         },

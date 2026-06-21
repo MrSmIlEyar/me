@@ -6,6 +6,8 @@ import Papa from 'papaparse';
 import {Icon} from "@iconify/react";
 import '@/i18n';
 import {useTranslation} from 'react-i18next';
+import {motion, AnimatePresence} from 'framer-motion';
+import Magnetic from '@/components/shared/Magnetic';
 
 const Quote = () => {
     const [quote, setQuote] = useState({text: '', author: ''});
@@ -66,18 +68,38 @@ const Quote = () => {
 
     return (
         <div className='min-h-[36vh] grid'>
-            <div className="grid gap-2 justify-center items-center min-w-full justify-self-center min-h-[32vh]">
-                <blockquote className="grid gap-3 italic p-2">
-                    <p className='font-medium justify-self-start'>{quote.text}</p>
-                    <cite className="flex gap-2 items-center justify-self-end text-gray-800"><Icon
-                        icon="bi:c-circle"/> {quote.author.length !== 0 ? quote.author : "Unknown"}</cite>
-                </blockquote>
+            <div className="relative grid gap-2 justify-center items-center min-w-full justify-self-center min-h-[32vh] overflow-hidden">
+                <Icon
+                    icon="mdi:format-quote-open"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-4 -left-2 text-black/[0.06] select-none"
+                    width={120}
+                    height={120}
+                />
+                <AnimatePresence mode="wait">
+                    <motion.blockquote
+                        key={quote.text + quote.author}
+                        className="relative grid gap-3 italic p-2"
+                        initial={{opacity: 0, y: 16, filter: 'blur(6px)'}}
+                        animate={{opacity: 1, y: 0, filter: 'blur(0px)'}}
+                        exit={{opacity: 0, y: -16, filter: 'blur(6px)'}}
+                        transition={{duration: 0.4, ease: 'easeOut'}}
+                    >
+                        <p className='font-medium justify-self-start'>{quote.text}</p>
+                        <cite className="flex gap-2 items-center justify-self-end text-gray-800"><Icon
+                            icon="bi:c-circle"/> {quote.author.length !== 0 ? quote.author : "Unknown"}</cite>
+                    </motion.blockquote>
+                </AnimatePresence>
             </div>
-            <button
-                className="flex justify-self-center gap-2 items-center justify-center bg-black text-white p-2 rounded-xl hover:bg-gray-800 h-[4vh]"
-                onClick={getRandomQuote}>
-                <Icon icon="mdi:format-quote-open"/> {t('NewQuote')} <Icon icon="mdi:format-quote-close"/>
-            </button>
+            <Magnetic strength={0.4}>
+                <motion.button
+                    whileTap={{scale: 0.95}}
+                    className="group relative overflow-hidden flex justify-self-center gap-2 items-center justify-center bg-black text-white p-2 px-4 rounded-xl h-[4vh]"
+                    onClick={getRandomQuote}>
+                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full"/>
+                    <Icon icon="mdi:format-quote-open"/> {t('NewQuote')} <Icon icon="mdi:format-quote-close"/>
+                </motion.button>
+            </Magnetic>
         </div>
     )
         ;
