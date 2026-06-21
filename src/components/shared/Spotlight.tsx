@@ -27,11 +27,7 @@ const Spotlight: React.FC = () => {
         <motion.div
             aria-hidden="true"
             className="pointer-events-none fixed inset-0 z-[5] hidden md:block mix-blend-multiply"
-            style={{
-                background: "radial-gradient(circle 22rem at var(--x) var(--y), rgba(0,0,0,0.10), transparent 70%)",
-                ["--x" as string]: x,
-                ["--y" as string]: y,
-            }}
+            style={{ background }}
         />
     )
 }
