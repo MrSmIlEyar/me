@@ -16,9 +16,10 @@ import LanguageSwitcher from "@/components/shared/LanguageSwitcher"
 import "@/i18n"
 import { useTranslation } from "react-i18next"
 import Quote from "@/components/shared/Quote"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import GlassBackground from "@/components/shared/GlassBackground";
-// import GlassBackground from "@/components/shared/GlassBackground"
+import Spotlight from "@/components/shared/Spotlight"
+import Grain from "@/components/shared/Grain"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -61,9 +62,23 @@ export default function Home() {
     const careerOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1])
     const careerY = useTransform(scrollYProgress, [0.2, 0.3], [50, 0])
 
+    // smooth top scroll-progress indicator
+    const progressScaleX = useSpring(scrollYProgress, {
+        stiffness: 120,
+        damping: 30,
+        restDelta: 0.001,
+    })
+
     return (
         <ParallaxProvider>
             <div className="relative min-h-screen">
+                <motion.div
+                    aria-hidden="true"
+                    className="fixed top-0 left-0 right-0 h-[3px] bg-black origin-left z-50"
+                    style={{ scaleX: progressScaleX }}
+                />
+                <Spotlight />
+                <Grain />
                 <GlassBackground />
                 <div className="grid place-items-center min-h-screen relative z-10">
                     <div className="grid place-items-center gap-7">
@@ -75,6 +90,8 @@ export default function Home() {
                                     initial={{ opacity: 0, scale: 0.5 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
+                                    whileHover={{ scale: 1.05, rotate: -2 }}
+                                    className="rounded-full ring-1 ring-black/10 shadow-[0_0_0_8px_rgba(0,0,0,0.03)] transition-shadow hover:shadow-[0_0_40px_4px_rgba(0,0,0,0.15)]"
                                 >
                                     <Avatar className="w-[200px] h-[200px] border-2 border-gray-200">
                                         <AvatarImage
@@ -90,7 +107,7 @@ export default function Home() {
                         {loading ? (
                             <Skeleton width={200} />
                         ) : (
-                            <div className="text-xl font-bold flex justify-center w-[5]">
+                            <div className="text-xl font-bold flex justify-center w-[5] shimmer-text">
                                 <TypeAnimation
                                     sequence={[
                                         "Yaroslav Efremov",
@@ -253,10 +270,6 @@ export default function Home() {
                                     <p>{t("City")}</p>
                                 </div>
                                 <div className="flex gap-2 items-center justify-start">
-                                    <Icon icon="tdesign:education" />
-                                    <p>{t("University")}</p>
-                                </div>
-                                <div className="flex gap-2 items-center justify-start">
                                     <Icon icon="material-symbols:work" />
                                     <p>{t("Work")}</p>
                                 </div>
@@ -269,7 +282,7 @@ export default function Home() {
                                     <div className="flex-grow h-px bg-white"></div>
                                 </div>
                                 <motion.ul className="space-y-4">
-                                    {["SLON", "THX Bot Group", "Megamailer", t("Internetika"), t("Dyva")].map((item, index) => (
+                                    {["SLON", "Megamailer", t("Dyva")].map((item, index) => (
                                         <motion.li
                                             key={item}
                                             className="space-y-3"
@@ -320,26 +333,6 @@ export default function Home() {
                                                     </li>
                                                 </ul>
                                             )}
-                                            {item === "THX Bot Group" && (
-                                                <ul className="ml-2 space-y-1 border-l space-x-3">
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm ml-3">
-                                                            <Icon icon="icomoon-free:info" className="flex-shrink-0" /> {t("THXAbout")}
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm">
-                                                            <Icon icon="formkit:datetime" className="flex-shrink-0" /> {t("THXTime")}
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm">
-                                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0" />
-                                                            {t("THXStack")}
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            )}
                                             {item === "Megamailer" && (
                                                 <ul className="ml-2 space-y-1 border-l space-x-3">
                                                     <li>
@@ -373,33 +366,6 @@ export default function Home() {
                                                                     <p>Docker</p>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            )}
-                                            {item === t("Internetika") && (
-                                                <ul className="ml-2 space-y-1 border-l space-x-3">
-                                                    <li>
-                                                        <div className="flex items-baseline gap-2 text-sm ml-3">
-                                                            <Icon icon="icomoon-free:info" /> {t("InternetikaAbout")}
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm">
-                                                            <Icon icon="formkit:datetime" /> {t("InternetikaTime")}
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm">
-                                                            <Icon icon="icon-park-outline:instruction" /> {t("InternetikaStack")}
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="flex gap-2 items-center text-sm">
-                                                            <Icon icon="material-symbols:link" />{" "}
-                                                            <a href="https://internetika.dev/" className="underline">
-                                                                {t("InternetikaLink")}
-                                                            </a>
                                                         </div>
                                                     </li>
                                                 </ul>
