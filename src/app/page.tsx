@@ -21,6 +21,7 @@ import GlassBackground from "@/components/shared/GlassBackground";
 import Spotlight from "@/components/shared/Spotlight"
 import Grain from "@/components/shared/Grain"
 import Magnetic from "@/components/shared/Magnetic"
+import SectionDivider from "@/components/shared/SectionDivider"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -253,15 +254,15 @@ export default function Home() {
                 >
                     <Parallax>
                         <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-5 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
-                            <motion.div
-                                className="langDiv sticky flex top-2 z-10 w-full"
-                                animate={{
-                                    justifyContent: isSticky ? "flex-end" : "center",
-                                }}
-                                transition={{ duration: 1.5, ease: "easeInOut" }}
-                            >
-                                <LanguageSwitcher />
-                            </motion.div>
+                            <div className="langDiv sticky flex top-2 z-10 w-full">
+                                <motion.div
+                                    layout
+                                    transition={{ type: "spring", stiffness: 220, damping: 28 }}
+                                    className={isSticky ? "ml-auto" : "mx-auto"}
+                                >
+                                    <LanguageSwitcher />
+                                </motion.div>
+                            </div>
                             <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
                               <motion.div
                                 key={i18n.language}
@@ -270,40 +271,44 @@ export default function Home() {
                                 transition={{ duration: 0.45, ease: "easeOut" }}
                                 className="space-y-4"
                               >
-                                <div className="flex items-center">
-                                    <div className="flex-grow h-px bg-white"></div>
-                                    <div className="flex-shrink text-2xl text-white px-4 font-light">
-                                        <h2 className="text-2xl font-bold">{t("AboutMeTitle")}</h2>
-                                    </div>
-                                    <div className="flex-grow h-px bg-white"></div>
-                                </div>
-                                <div className="flex gap-2 items-center justify-start">
-                                    <Icon icon="mdi:location" className="fade-in" />
+                                <SectionDivider title={t("AboutMeTitle")} light />
+                                <motion.div
+                                    className="flex gap-2 items-center justify-start"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.8 }}
+                                    transition={{ duration: 0.4 }}
+                                >
+                                    <Icon icon="mdi:location" className="shrink-0" />
                                     <p>{t("City")}</p>
-                                </div>
-                                <div className="flex gap-2 items-center justify-start">
-                                    <Icon icon="material-symbols:work" />
+                                </motion.div>
+                                <motion.div
+                                    className="flex gap-2 items-center justify-start"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.8 }}
+                                    transition={{ duration: 0.4, delay: 0.08 }}
+                                >
+                                    <Icon icon="material-symbols:work" className="shrink-0" />
                                     <p>{t("Work")}</p>
-                                </div>
-                                <p>{t("AboutMe")}</p>
-                                <div className="flex items-center">
-                                    <div className="flex-grow h-px bg-white"></div>
-                                    <div className="flex-shrink text-2xl text-white px-4 font-light">
-                                        <h2 className="text-2xl font-bold">{t("Career")}</h2>
-                                    </div>
-                                    <div className="flex-grow h-px bg-white"></div>
-                                </div>
-                                <motion.ul className="space-y-4">
+                                </motion.div>
+                                <p className="leading-relaxed text-white/90">{t("AboutMe")}</p>
+                                <SectionDivider title={t("Career")} light />
+                                <motion.ul className="relative ml-1 space-y-2 border-l border-white/20 pl-5">
                                     {["SLON", "Megamailer", t("Dyva")].map((item, index) => (
                                         <motion.li
                                             key={item}
-                                            className="space-y-3"
-                                            initial={{ opacity: 0, x: -50 }}
-                                            animate={{ opacity: 1, x: 0 }}
+                                            className="group relative space-y-3 rounded-r-xl py-3 pr-3 transition-colors duration-300 hover:bg-white/[0.05]"
+                                            initial={{ opacity: 0, x: -28 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true, amount: 0.3 }}
                                             transition={{ duration: 0.5, delay: index * 0.1 }}
                                         >
-                                            <div className="flex gap-2 items-center font-bold">
-                                                <Icon icon="octicon:dot-16" />
+                                            <span
+                                                aria-hidden="true"
+                                                className="absolute -left-[25px] top-[18px] h-2.5 w-2.5 rounded-full bg-white ring-4 ring-black transition-transform duration-300 group-hover:scale-150"
+                                            />
+                                            <div className="flex gap-2 items-center font-bold text-lg transition-transform duration-300 group-hover:translate-x-1">
                                                 {item}
                                             </div>
                                             {item === "SLON" && (
@@ -453,63 +458,61 @@ export default function Home() {
                             transition={{ duration: 0.45, ease: "easeOut" }}
                         >
                             <div className="grid gap-3 p-5">
-                                <div className="flex items-center">
-                                    <div className="flex-grow h-px bg-black"></div>
-                                    <div className="flex-shrink text-2xl text-black px-4 font-light">
-                                        <h2 className="text-2xl font-bold">{t("Hobby")}</h2>
-                                    </div>
-                                    <div className="flex-grow h-px bg-black"></div>
-                                </div>
-                                <ul className="space-y-4">
+                                <SectionDivider title={t("Hobby")} />
+                                <ul className="grid gap-3 sm:grid-cols-2">
                                     <motion.li
-                                        className="space-y-3"
-                                        initial={{ opacity: 0, x: -40 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true, amount: 0.6 }}
+                                        className="group relative overflow-hidden rounded-xl border border-black/15 p-4 transition-all duration-300 hover:border-black hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1"
+                                        initial={{ opacity: 0, y: 24 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.5 }}
                                         transition={{ duration: 0.5 }}
                                     >
-                                        <div className="flex gap-2 items-center font-bold">
-                                            <Icon icon="octicon:dot-16" />
-                                            {t("Chess")}
+                                        <Icon
+                                            icon="simple-icons:lichess"
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
+                                            width={88}
+                                            height={88}
+                                        />
+                                        <div className="relative space-y-3">
+                                            <div className="flex gap-2 items-center font-bold">
+                                                <Icon icon="octicon:dot-16" />
+                                                {t("Chess")}
+                                            </div>
+                                            <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
+                                                <Icon icon="simple-icons:lichess" className="shrink-0" />{" "}
+                                                <a href="https://lichess.org/@/Mr_Smile_XD" className="link-underline">
+                                                    {t("ChessAbout")}
+                                                </a>
+                                            </div>
                                         </div>
-                                        <ul className="ml-2 space-y-1 border-l border-black transition-all duration-300 hover:border-l-2 hover:pl-1">
-                                            <li>
-                                                <div className="flex gap-2 items-center text-sm ml-3 transition-transform duration-300 hover:translate-x-1">
-                                                    <Icon icon="simple-icons:lichess" />{" "}
-                                                    <a href="https://lichess.org/@/Mr_Smile_XD" className="link-underline">
-                                                        {t("ChessAbout")}
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul>
                                     </motion.li>
                                     <motion.li
-                                        className="space-y-3"
-                                        initial={{ opacity: 0, x: -40 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true, amount: 0.6 }}
+                                        className="group relative overflow-hidden rounded-xl border border-black/15 p-4 transition-all duration-300 hover:border-black hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1"
+                                        initial={{ opacity: 0, y: 24 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.5 }}
                                         transition={{ duration: 0.5, delay: 0.1 }}
                                     >
-                                        <div className="flex gap-2 items-center font-bold">
-                                            <Icon icon="octicon:dot-16" />
-                                            {t("RubiksCube")}
+                                        <Icon
+                                            icon="streamline:rubik-cube"
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
+                                            width={88}
+                                            height={88}
+                                        />
+                                        <div className="relative space-y-3">
+                                            <div className="flex gap-2 items-center font-bold">
+                                                <Icon icon="octicon:dot-16" />
+                                                {t("RubiksCube")}
+                                            </div>
+                                            <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
+                                                <Icon icon="icomoon-free:info" className="shrink-0" /> {t("RubiksCubeTime")}
+                                            </div>
                                         </div>
-                                        <ul className="ml-2 space-y-1 border-l border-black transition-all duration-300 hover:border-l-2 hover:pl-1">
-                                            <li>
-                                                <div className="flex gap-2 items-center text-sm ml-3 transition-transform duration-300 hover:translate-x-1">
-                                                    <Icon icon="icomoon-free:info" /> {t("RubiksCubeTime")}
-                                                </div>
-                                            </li>
-                                        </ul>
                                     </motion.li>
                                 </ul>
-                                <div className="flex items-center">
-                                    <div className="flex-grow h-px bg-black"></div>
-                                    <div className="flex-shrink text-2xl text-black px-4 font-light">
-                                        <h2 className="text-2xl font-bold">{t("Quotes")}</h2>
-                                    </div>
-                                    <div className="flex-grow h-px bg-black"></div>
-                                </div>
+                                <SectionDivider title={t("Quotes")} />
                                 <div className="min-w-full">
                                     <Quote />
                                 </div>
