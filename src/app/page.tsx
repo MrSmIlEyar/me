@@ -17,7 +17,6 @@ import "@/i18n"
 import { useTranslation } from "react-i18next"
 import Quote from "@/components/shared/Quote"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-import GlassBackground from "@/components/shared/GlassBackground";
 import Spotlight from "@/components/shared/Spotlight"
 import Grain from "@/components/shared/Grain"
 import Magnetic from "@/components/shared/Magnetic"
@@ -81,7 +80,6 @@ export default function Home() {
                 />
                 <Spotlight />
                 <Grain />
-                <GlassBackground />
                 <div className="grid place-items-center min-h-screen relative z-10">
                     <div className="grid place-items-center gap-7">
                         {loading ? (
@@ -325,18 +323,12 @@ export default function Home() {
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div className="flex gap-2 items-baseline text-sm">
+                                                        <div className="flex gap-2 items-start text-sm">
                                                             <Icon icon="icon-park-outline:instruction"
-                                                                  className="flex-shrink-0"/>
+                                                                  className="flex-shrink-0 mt-0.5"/>
                                                             <div className="grid gap-1">
-                                                                <div className="flex gap-2">
-                                                                    <p>Backend: </p>
-                                                                    <p>Bash, aiogram</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>DB-system: </p>
-                                                                    <p>MariaDB, Prisma</p>
-                                                                </div>
+                                                                <p><span className="font-medium">Backend:</span> Bash, aiogram</p>
+                                                                <p><span className="font-medium">DB-system:</span> MariaDB, Prisma</p>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -363,25 +355,13 @@ export default function Home() {
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div className="flex gap-2 items-baseline text-sm">
-                                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0" />
+                                                        <div className="flex gap-2 items-start text-sm">
+                                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0 mt-0.5" />
                                                             <div className="grid gap-1">
-                                                                <div className="flex gap-2">
-                                                                    <p>Backend: </p>
-                                                                    <p>Django, Flask</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>Frontend:</p>
-                                                                    <p>React</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>DB-system: </p>
-                                                                    <p>PostgreSQL, MySQL</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>Deployment:</p>
-                                                                    <p>Docker</p>
-                                                                </div>
+                                                                <p><span className="font-medium">Backend:</span> Django, Flask</p>
+                                                                <p><span className="font-medium">Frontend:</span> React</p>
+                                                                <p><span className="font-medium">DB-system:</span> PostgreSQL, MySQL</p>
+                                                                <p><span className="font-medium">Deployment:</span> Docker</p>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -405,24 +385,12 @@ export default function Home() {
                                                     </li>
                                                     <li>
                                                         <div className="flex gap-2 items-start text-sm">
-                                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0" />
+                                                            <Icon icon="icon-park-outline:instruction" className="flex-shrink-0 mt-0.5" />
                                                             <div className="grid gap-1">
-                                                                <div className="flex gap-2">
-                                                                    <p>Backend: </p>
-                                                                    <p>Django, Redis, Memcached, Celery, OpenAPI</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>Frontend:</p>
-                                                                    <p>TypeScript, React, NextJS</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>DB-system: </p>
-                                                                    <p>PostgreSQL, S3</p>
-                                                                </div>
-                                                                <div className="flex gap-2">
-                                                                    <p>Deployment:</p>
-                                                                    <p>Kubernetes, Helm, Docker, Gitlab CI/CD</p>
-                                                                </div>
+                                                                <p><span className="font-medium">Backend:</span> Django, Redis, Memcached, Celery, OpenAPI</p>
+                                                                <p><span className="font-medium">Frontend:</span> TypeScript, React, NextJS</p>
+                                                                <p><span className="font-medium">DB-system:</span> PostgreSQL, S3</p>
+                                                                <p><span className="font-medium">Deployment:</span> Kubernetes, Helm, Docker, Gitlab CI/CD</p>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -495,7 +463,7 @@ export default function Home() {
                                         transition={{ duration: 0.5, delay: 0.1 }}
                                     >
                                         <Icon
-                                            icon="streamline:rubik-cube"
+                                            icon="mdi:cube-outline"
                                             aria-hidden="true"
                                             className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
                                             width={88}
@@ -508,6 +476,34 @@ export default function Home() {
                                             </div>
                                             <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
                                                 <Icon icon="icomoon-free:info" className="shrink-0" /> {t("RubiksCubeTime")}
+                                            </div>
+                                        </div>
+                                    </motion.li>
+                                    <motion.li
+                                        className="group relative overflow-hidden rounded-xl border border-black/15 p-4 transition-all duration-300 hover:border-black hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 sm:col-span-2"
+                                        initial={{ opacity: 0, y: 24 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.5 }}
+                                        transition={{ duration: 0.5, delay: 0.2 }}
+                                    >
+                                        <Icon
+                                            icon="mdi:usb-flash-drive"
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
+                                            width={88}
+                                            height={88}
+                                        />
+                                        <div className="relative space-y-3">
+                                            <div className="flex gap-2 items-center font-bold">
+                                                <Icon icon="octicon:dot-16" />
+                                                {t("YrStore")}
+                                            </div>
+                                            <p className="text-sm text-black/70">{t("YrStoreAbout")}</p>
+                                            <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
+                                                <Icon icon="mdi:usb-flash-drive" className="shrink-0" />{" "}
+                                                <a href="https://yr-store.ru" target="_blank" rel="noreferrer" className="link-underline">
+                                                    {t("YrStoreLink")}
+                                                </a>
                                             </div>
                                         </div>
                                     </motion.li>
