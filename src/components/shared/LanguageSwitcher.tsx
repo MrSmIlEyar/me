@@ -1,46 +1,56 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import {cn} from "@/lib/utils";
+"use client"
+
+import React from "react"
+import { useTranslation } from "react-i18next"
+import { motion } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 interface Props {
-    className?: string;
+    className?: string
 }
 
-const LanguageSwitcher:React.FC<Props> = (className) => {
-    const { i18n } = useTranslation();
-    const [currentLanguage, setCurrentLanguage] = React.useState(i18n.language);
+const LANGS = ["ru", "en"] as const
+
+const LanguageSwitcher: React.FC<Props> = ({ className }) => {
+    const { i18n } = useTranslation()
+    const [currentLanguage, setCurrentLanguage] = React.useState(i18n.language?.startsWith("en") ? "en" : "ru")
 
     const changeLanguage = (lng: string) => {
-        i18n.changeLanguage(lng);
-        setCurrentLanguage(lng);
-    };
+        i18n.changeLanguage(lng)
+        setCurrentLanguage(lng)
+    }
 
     return (
-        <div className={cn(className, 'flex justify-center items-center gap-1 backdrop-blur-lg rounded-xl p-1 border-white border text-[12px]')}>
-            <button
-                onClick={() => changeLanguage('ru')}
-                style={{
-                    backgroundColor: currentLanguage === 'ru' ? 'white' : '',
-                    color: currentLanguage === 'ru' ? 'black' : '',
-                    border: currentLanguage === 'ru' ? '1px solid black' : '',
-                }}
-                className='px-1 rounded-lg'
-            >
-                ru
-            </button>
-            <button
-                onClick={() => changeLanguage('en')}
-                style={{
-                    backgroundColor: currentLanguage === 'en' ? 'white' : '',
-                    color: currentLanguage === 'en' ? 'black' : '',
-                    border: currentLanguage === 'en' ? '1px solid black' : '',
-                }}
-                className='px-1 rounded-lg'
-            >
-                en
-            </button>
+        <div
+            className={cn(
+                className,
+                "relative flex justify-center items-center gap-1 backdrop-blur-lg rounded-xl p-1 border-white border text-[12px]",
+            )}
+        >
+            {LANGS.map((lng) => {
+                const active = currentLanguage === lng
+                return (
+                    <button
+                        key={lng}
+                        onClick={() => changeLanguage(lng)}
+                        className={cn(
+                            "relative px-2 py-0.5 rounded-lg transition-colors duration-300",
+                            active ? "text-black" : "text-white/80 hover:text-white",
+                        )}
+                    >
+                        {active && (
+                            <motion.span
+                                layoutId="lang-pill"
+                                className="absolute inset-0 rounded-lg bg-white"
+                                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                            />
+                        )}
+                        <span className="relative z-10">{lng}</span>
+                    </button>
+                )
+            })}
         </div>
-    );
-};
+    )
+}
 
-export default LanguageSwitcher;
+export default LanguageSwitcher

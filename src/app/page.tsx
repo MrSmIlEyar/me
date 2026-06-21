@@ -20,13 +20,14 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import GlassBackground from "@/components/shared/GlassBackground";
 import Spotlight from "@/components/shared/Spotlight"
 import Grain from "@/components/shared/Grain"
+import Magnetic from "@/components/shared/Magnetic"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
     const [progress, setProgress] = useState(0)
     const [isSticky, setIsSticky] = useState(false)
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     // хук под прогресс бар
     useEffect(() => {
@@ -141,15 +142,15 @@ export default function Home() {
                                 </>
                             ) : (
                                 <>
-                                    <Icon icon="mdi:react" width={32} height={32} className="fade-in animate-spin-slow" />
-                                    <Icon icon="lineicons:typescript" width={32} height={32} className="fade-in" />
-                                    <Icon icon="ri:nextjs-fill" width={32} height={32} className="fade-in" />
-                                    <Icon icon="tabler:brand-django" width={32} height={32} className="fade-in" />
-                                    <Icon icon="devicon-plain:fastapi" width={32} height={32} className="fade-in" />
-                                    <Icon icon="logos:flask" width={32} height={32} className="fade-in" />
-                                    <Icon icon="tabler:sql" width={32} height={32} className="fade-in" />
-                                    <Icon icon="mdi:docker" width={32} height={32} className="fade-in" />
-                                    <Icon icon="cib:nginx" width={32} height={32} className="fade-in" />
+                                    <Icon icon="mdi:react" width={32} height={32} className="fade-in animate-spin-slow grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="lineicons:typescript" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="ri:nextjs-fill" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="tabler:brand-django" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="devicon-plain:fastapi" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="logos:flask" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="tabler:sql" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="mdi:docker" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="cib:nginx" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
                                 </>
                             )}
                         </motion.div>
@@ -220,17 +221,21 @@ export default function Home() {
                             {loading ? (
                                 <Skeleton width={150} />
                             ) : (
-                                <motion.a
-                                    href="/CV_Fullstack_Developer.pdf"
-                                    download="CV_Fullstack_Developer.pdf"
-                                    target="_blank"
-                                    className="flex gap-2 bg-black text-white p-2 rounded-xl hover:backdrop-blur-sm hover:bg-opacity-85"
-                                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                    whileTap={{ scale: 0.95 }}
-                                    rel="noreferrer"
-                                >
-                                    <Download /> Download CV
-                                </motion.a>
+                                <Magnetic strength={0.5}>
+                                    <motion.a
+                                        href="/CV_Fullstack_Developer.pdf"
+                                        download="CV_Fullstack_Developer.pdf"
+                                        target="_blank"
+                                        className="group relative flex gap-2 overflow-hidden bg-black text-white p-2 px-4 rounded-xl"
+                                        whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                                        whileTap={{ scale: 0.95 }}
+                                        rel="noreferrer"
+                                    >
+                                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                                        <Download className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="relative">Download CV</span>
+                                    </motion.a>
+                                </Magnetic>
                             )}
                             {loading ? (
                                 <Skeleton circle width={25} height={25} />
@@ -258,6 +263,13 @@ export default function Home() {
                                 <LanguageSwitcher />
                             </motion.div>
                             <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
+                              <motion.div
+                                key={i18n.language}
+                                initial={{ opacity: 0, filter: "blur(10px)" }}
+                                animate={{ opacity: 1, filter: "blur(0px)" }}
+                                transition={{ duration: 0.45, ease: "easeOut" }}
+                                className="space-y-4"
+                              >
                                 <div className="flex items-center">
                                     <div className="flex-grow h-px bg-white"></div>
                                     <div className="flex-shrink text-2xl text-white px-4 font-light">
@@ -422,6 +434,7 @@ export default function Home() {
                                         </motion.li>
                                     ))}
                                 </motion.ul>
+                              </motion.div>
                             </motion.div>
                         </div>
                     </Parallax>
@@ -433,7 +446,12 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.8 }}
                 >
                     <Parallax>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
+                        <motion.div
+                            key={i18n.language}
+                            initial={{ opacity: 0, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, filter: "blur(0px)" }}
+                            transition={{ duration: 0.45, ease: "easeOut" }}
+                        >
                             <div className="grid gap-3 p-5">
                                 <div className="flex items-center">
                                     <div className="flex-grow h-px bg-black"></div>
