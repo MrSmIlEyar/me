@@ -142,7 +142,7 @@ export default function Home() {
                                 </>
                             ) : (
                                 <>
-                                    <Icon icon="mdi:react" width={32} height={32} className="fade-in animate-spin-slow grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
+                                    <Icon icon="mdi:react" width={32} height={32} className="fade-in animate-spin-slow" />
                                     <Icon icon="lineicons:typescript" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
                                     <Icon icon="ri:nextjs-fill" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
                                     <Icon icon="tabler:brand-django" width={32} height={32} className="fade-in grayscale transition-all duration-300 hover:grayscale-0 hover:scale-125" />
@@ -461,35 +461,47 @@ export default function Home() {
                                     <div className="flex-grow h-px bg-black"></div>
                                 </div>
                                 <ul className="space-y-4">
-                                    <li className="space-y-3">
+                                    <motion.li
+                                        className="space-y-3"
+                                        initial={{ opacity: 0, x: -40 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, amount: 0.6 }}
+                                        transition={{ duration: 0.5 }}
+                                    >
                                         <div className="flex gap-2 items-center font-bold">
                                             <Icon icon="octicon:dot-16" />
                                             {t("Chess")}
                                         </div>
-                                        <ul className="ml-2 space-y-1 border-l border-black">
+                                        <ul className="ml-2 space-y-1 border-l border-black transition-all duration-300 hover:border-l-2 hover:pl-1">
                                             <li>
-                                                <div className="flex gap-2 items-center text-sm ml-3">
+                                                <div className="flex gap-2 items-center text-sm ml-3 transition-transform duration-300 hover:translate-x-1">
                                                     <Icon icon="simple-icons:lichess" />{" "}
-                                                    <a href="https://lichess.org/@/Mr_Smile_XD" className="underline">
+                                                    <a href="https://lichess.org/@/Mr_Smile_XD" className="link-underline">
                                                         {t("ChessAbout")}
                                                     </a>
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li className="space-y-3">
+                                    </motion.li>
+                                    <motion.li
+                                        className="space-y-3"
+                                        initial={{ opacity: 0, x: -40 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, amount: 0.6 }}
+                                        transition={{ duration: 0.5, delay: 0.1 }}
+                                    >
                                         <div className="flex gap-2 items-center font-bold">
                                             <Icon icon="octicon:dot-16" />
                                             {t("RubiksCube")}
                                         </div>
-                                        <ul className="ml-2 space-y-1 border-l border-black">
+                                        <ul className="ml-2 space-y-1 border-l border-black transition-all duration-300 hover:border-l-2 hover:pl-1">
                                             <li>
-                                                <div className="flex gap-2 items-center text-sm ml-3">
+                                                <div className="flex gap-2 items-center text-sm ml-3 transition-transform duration-300 hover:translate-x-1">
                                                     <Icon icon="icomoon-free:info" /> {t("RubiksCubeTime")}
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </motion.li>
                                 </ul>
                                 <div className="flex items-center">
                                     <div className="flex-grow h-px bg-black"></div>
@@ -515,10 +527,11 @@ export default function Home() {
                                     <a
                                         href="https://github.com/MrSmIlEyar/me"
                                         target="_blank"
-                                        className="underline text-[12px] flex gap-1 justify-center items-center"
+                                        className="group text-[12px] flex gap-1 justify-center items-center"
                                         rel="noreferrer"
                                     >
-                                        source code
+                                        <Github width={13} height={13} className="transition-transform duration-300 group-hover:rotate-12" />
+                                        <span className="link-underline">source code</span>
                                     </a>
                                     <a
                                         onClick={() => {
@@ -527,9 +540,10 @@ export default function Home() {
                                                 behavior: "smooth",
                                             })
                                         }}
-                                        className="underline text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center"
+                                        className="group text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center"
                                     >
-                                        back to top
+                                        <Icon icon="simple-line-icons:arrow-up" className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="link-underline">back to top</span>
                                     </a>
                                 </div>
                             </div>

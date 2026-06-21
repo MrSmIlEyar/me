@@ -45,11 +45,25 @@ body {
     100% { background-position: -200% 0; }
   }
 
-  /* Reveal-up entrance for divider headings */
-  .reveal-line::after {
+  /* Animated underline that draws in from the left on hover */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
     content: "";
-    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
     height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .group:hover .link-underline::after,
+  .link-underline:hover::after {
+    transform: scaleX(1);
   }
 
   @media (prefers-reduced-motion: reduce) {
