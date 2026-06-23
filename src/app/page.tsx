@@ -26,7 +26,8 @@ import SectionDivider from "@/components/shared/SectionDivider"
 export default function Home() {
     const [loading, setLoading] = useState(true)
     const [progress, setProgress] = useState(0)
-    const [isSticky, setIsSticky] = useState(false)
+    const [showSwitcher, setShowSwitcher] = useState(false)
+    const [pinnedRight, setPinnedRight] = useState(false)
 
     const { t, i18n } = useTranslation()
 
@@ -44,46 +45,41 @@ export default function Home() {
         return () => clearTimeout(timer)
     }, [])
 
-    // рефы на прокручиваемые секции (для снап-скролла как в рилсах)
+    // рефы на прокручиваемые секции (для снап-скролла)
     const careerSectionRef = useRef<HTMLDivElement | null>(null)
     const hobbySectionRef = useRef<HTMLDivElement | null>(null)
 
-    // Сдвигаем переключатель языка вправо при внутренней прокрутке секции
+    // Управляем единым переключателем языка + сбрасываем внутренний скролл неактивных секций
     useEffect(() => {
         if (loading) return
-        const sections = [careerSectionRef.current, hobbySectionRef.current].filter(
-            (el): el is HTMLDivElement => Boolean(el),
-        )
-        const handlers: Array<[HTMLDivElement, () => void]> = []
-        sections.forEach((section) => {
-            const handler = () => setIsSticky(section.scrollTop > 40)
-            section.addEventListener("scroll", handler, { passive: true })
-            handlers.push([section, handler])
-        })
-        return () => handlers.forEach(([section, handler]) => section.removeEventListener("scroll", handler))
-    }, [loading])
+        const career = careerSectionRef.current
+        const hobby = hobbySectionRef.current
 
-    // Сбрасываем внутренний скролл неактивных секций при смене (каждый раз в начало)
-    useEffect(() => {
-        if (loading) return
-        const handleWindowScroll = () => {
+        const update = () => {
             const vh = window.innerHeight || 1
-            // 0 — главная, 1 — карьера, 2 — хобби
+            // 0 — главная, 1 — карьера, 2 — хобби/цитаты
             const activeIndex = Math.round(window.scrollY / vh)
-            const sections: Array<[number, HTMLDivElement | null]> = [
-                [1, careerSectionRef.current],
-                [2, hobbySectionRef.current],
-            ]
-            sections.forEach(([index, section]) => {
-                if (section && index !== activeIndex) {
-                    section.scrollTop = 0
-                }
-            })
-            const active = sections.find(([index]) => index === activeIndex)?.[1]
-            setIsSticky(active ? active.scrollTop > 40 : false)
+
+            // каждая неактивная секция возвращается в начало
+            if (career && activeIndex !== 1) career.scrollTop = 0
+            if (hobby && activeIndex !== 2) hobby.scrollTop = 0
+
+            const careerScrolled = career ? career.scrollTop > 40 : false
+            // переключатель появляется в блоке карьеры и дальше
+            setShowSwitcher(activeIndex >= 1)
+            // центрирован в начале карьеры, уезжает вправо при прокрутке и держится там дальше
+            setPinnedRight(activeIndex >= 2 || (activeIndex === 1 && careerScrolled))
         }
-        window.addEventListener("scroll", handleWindowScroll, { passive: true })
-        return () => window.removeEventListener("scroll", handleWindowScroll)
+
+        update()
+        window.addEventListener("scroll", update, { passive: true })
+        career?.addEventListener("scroll", update, { passive: true })
+        hobby?.addEventListener("scroll", update, { passive: true })
+        return () => {
+            window.removeEventListener("scroll", update)
+            career?.removeEventListener("scroll", update)
+            hobby?.removeEventListener("scroll", update)
+        }
     }, [loading])
 
     const [ref, inView] = useInView({
@@ -112,6 +108,24 @@ export default function Home() {
                 />
                 <Spotlight />
                 <Grain />
+                {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
+                <motion.div
+                    className="fixed top-3 inset-x-0 z-[60] px-4 flex"
+                    initial={false}
+                    animate={{ opacity: showSwitcher ? 1 : 0, y: showSwitcher ? 0 : -10 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    style={{ pointerEvents: showSwitcher ? "auto" : "none" }}
+                >
+                    <motion.div
+                        layout
+                        transition={{ type: "spring", stiffness: 220, damping: 28 }}
+                        className={pinnedRight ? "ml-auto" : "mx-auto"}
+                    >
+                        <div className="rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg">
+                            <LanguageSwitcher />
+                        </div>
+                    </motion.div>
+                </motion.div>
                 <section className="snap-start snap-always h-screen overflow-y-auto no-scrollbar relative z-10">
                     <div className="min-h-screen grid place-items-center py-10">
                         <div className="grid place-items-center gap-7">
@@ -288,16 +302,7 @@ export default function Home() {
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-5 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
-                            <div className="langDiv sticky flex top-2 z-10 w-full">
-                                <motion.div
-                                    layout
-                                    transition={{ type: "spring", stiffness: 220, damping: 28 }}
-                                    className={isSticky ? "ml-auto" : "mx-auto"}
-                                >
-                                    <LanguageSwitcher />
-                                </motion.div>
-                            </div>
-                            <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
+                                <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
                                 <motion.div
                                     key={i18n.language}
                                     initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -466,15 +471,6 @@ export default function Home() {
                             transition={{ duration: 0.45, ease: "easeOut" }}
                         >
                             <div className="grid gap-3 p-5">
-                                <div className="langDiv sticky flex top-2 z-10 w-full">
-                                    <motion.div
-                                        layout
-                                        transition={{ type: "spring", stiffness: 220, damping: 28 }}
-                                        className={isSticky ? "ml-auto" : "mx-auto"}
-                                    >
-                                        <LanguageSwitcher />
-                                    </motion.div>
-                                </div>
                                 <SectionDivider title={t("Hobby")} />
                                 <ul className="grid gap-3 sm:grid-cols-2">
 
