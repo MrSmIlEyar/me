@@ -84,7 +84,7 @@ export default function Home() {
                 <div className="grid place-items-center min-h-screen relative z-10">
                     <div className="grid place-items-center gap-7">
                         {loading ? (
-                            <Skeleton width={320} height={310} borderRadius="1.5rem" />
+                            <Skeleton width={160} height={155} borderRadius="1rem" />
                         ) : (
                             <Parallax>
                                 <motion.div
@@ -99,8 +99,8 @@ export default function Home() {
                                         width={600}
                                         height={580}
                                         priority
-                                        sizes="(max-width: 640px) 320px, 360px"
-                                        className="h-auto w-[320px] sm:w-[360px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
+                                        sizes="(max-width: 640px) 160px, 180px"
+                                        className="h-auto w-[160px] sm:w-[180px] object-contain"
                                     />
                                 </motion.div>
                             </Parallax>
