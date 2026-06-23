@@ -81,8 +81,9 @@ export default function Home() {
                 />
                 <Spotlight />
                 <Grain />
-                <div className="grid place-items-center min-h-screen relative z-10">
-                    <div className="grid place-items-center gap-7">
+                <section className="snap-start snap-always h-screen overflow-y-auto no-scrollbar relative z-10">
+                    <div className="min-h-screen grid place-items-center py-10">
+                        <div className="grid place-items-center gap-7">
                         {loading ? (
                             <Skeleton width={160} height={155} borderRadius="1rem" />
                         ) : (
@@ -244,13 +245,15 @@ export default function Home() {
                             )}
                         </div>
                     </div>
-                </div>
+                    </div>
+                </section>
                 <motion.div
-                    className="mt-2 backdrop-blur-sm"
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-black backdrop-blur-sm"
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.1, delay: 0.05 }}
                 >
+                    <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-5 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
                             <div className="langDiv sticky flex top-2 z-10 w-full">
@@ -413,13 +416,15 @@ export default function Home() {
                             </motion.div>
                         </div>
                     </Parallax>
+                    </div>
                 </motion.div>
                 <motion.div
-                    className="bg-white"
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                 >
+                    <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <motion.div
                             key={i18n.language}
@@ -499,6 +504,7 @@ export default function Home() {
                             </div>
                         </motion.div>
                     </Parallax>
+                    </div>
                 </motion.div>
             </div>
         </ParallaxProvider>

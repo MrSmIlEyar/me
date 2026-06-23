@@ -20,7 +20,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="snap-y snap-mandatory scroll-smooth">
         <head>
             <link rel="preconnect" href="https://i.postimg.cc" crossOrigin="anonymous" />
             <link rel="dns-prefetch" href="https://i.postimg.cc" />
