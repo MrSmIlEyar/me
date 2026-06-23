@@ -7,15 +7,17 @@ import { cn } from "@/lib/utils"
 
 interface Props {
     className?: string
+    theme?: "dark" | "light"
 }
 
 const LANGS = ["ru", "en"] as const
 
-const LanguageSwitcher: React.FC<Props> = ({ className }) => {
+const LanguageSwitcher: React.FC<Props> = ({ className, theme = "dark" }) => {
     const { i18n } = useTranslation()
     const currentLanguage = i18n.language?.startsWith("en") ? "en" : "ru"
     // уникальный id, чтобы несколько переключателей на странице не делили один layoutId
     const pillId = React.useId()
+    const isLight = theme === "light"
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng)
@@ -25,7 +27,8 @@ const LanguageSwitcher: React.FC<Props> = ({ className }) => {
         <div
             className={cn(
                 className,
-                "relative flex justify-center items-center gap-1 backdrop-blur-lg rounded-xl p-1 border-white border text-[12px]",
+                "relative flex justify-center items-center gap-1 backdrop-blur-lg rounded-xl p-1 border text-[12px]",
+                isLight ? "border-black" : "border-white",
             )}
         >
             {LANGS.map((lng) => {
@@ -36,13 +39,22 @@ const LanguageSwitcher: React.FC<Props> = ({ className }) => {
                         onClick={() => changeLanguage(lng)}
                         className={cn(
                             "relative px-2 py-0.5 rounded-lg transition-colors duration-300",
-                            active ? "text-black" : "text-white/80 hover:text-white",
+                            active
+                                ? isLight
+                                    ? "text-white"
+                                    : "text-black"
+                                : isLight
+                                  ? "text-black/70 hover:text-black"
+                                  : "text-white/80 hover:text-white",
                         )}
                     >
                         {active && (
                             <motion.span
                                 layoutId={`lang-pill-${pillId}`}
-                                className="absolute inset-0 rounded-lg bg-white"
+                                className={cn(
+                                    "absolute inset-0 rounded-lg",
+                                    isLight ? "bg-black" : "bg-white",
+                                )}
                                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
                             />
                         )}

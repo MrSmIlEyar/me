@@ -28,6 +28,7 @@ export default function Home() {
     const [progress, setProgress] = useState(0)
     const [showSwitcher, setShowSwitcher] = useState(false)
     const [pinnedRight, setPinnedRight] = useState(false)
+    const [lightTheme, setLightTheme] = useState(false)
 
     const { t, i18n } = useTranslation()
 
@@ -69,6 +70,8 @@ export default function Home() {
             setShowSwitcher(activeIndex >= 1)
             // центрирован в начале карьеры, уезжает вправо при прокрутке и держится там дальше
             setPinnedRight(activeIndex >= 2 || (activeIndex === 1 && careerScrolled))
+            // на белом фоне (хобби/цитаты) — инвертированная тема виджета
+            setLightTheme(activeIndex >= 2)
         }
 
         update()
@@ -121,8 +124,14 @@ export default function Home() {
                         transition={{ type: "spring", stiffness: 220, damping: 28 }}
                         className={pinnedRight ? "ml-auto" : "mx-auto"}
                     >
-                        <div className="rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg">
-                            <LanguageSwitcher />
+                        <div
+                            className={
+                                lightTheme
+                                    ? "rounded-xl bg-white/70 backdrop-blur-md ring-1 ring-black/20 shadow-lg"
+                                    : "rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg"
+                            }
+                        >
+                            <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
                         </div>
                     </motion.div>
                 </motion.div>
@@ -301,14 +310,14 @@ export default function Home() {
                 >
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
-                        <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-5 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
+                        <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-4 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
                                 <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
                                 <motion.div
                                     key={i18n.language}
                                     initial={{ opacity: 0, filter: "blur(10px)" }}
                                     animate={{ opacity: 1, filter: "blur(0px)" }}
                                     transition={{ duration: 0.45, ease: "easeOut" }}
-                                    className="space-y-4"
+                                    className="space-y-4 mt-16"
                                 >
                                     <SectionDivider title={t("AboutMeTitle")} light />
                                     <motion.div
