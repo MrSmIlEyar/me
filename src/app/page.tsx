@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Download, Github, Mail } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Icon } from "@iconify/react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import Skeleton from "react-loading-skeleton"
