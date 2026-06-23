@@ -84,33 +84,23 @@ export default function Home() {
                 <div className="grid place-items-center min-h-screen relative z-10">
                     <div className="grid place-items-center gap-7">
                         {loading ? (
-                            <Skeleton width={240} height={280} borderRadius="2rem" />
+                            <Skeleton width={320} height={310} borderRadius="1.5rem" />
                         ) : (
                             <Parallax>
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.92, y: 12 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     transition={{ duration: 0.6, ease: "easeOut" }}
-                                    className="group relative w-[240px] h-[280px] flex items-end justify-center overflow-hidden rounded-[2rem] border border-black/10 bg-gradient-to-b from-black/[0.04] to-transparent"
+                                    className="group relative flex justify-center"
                                 >
-                                    {/* monochrome backdrop disc */}
-                                    <div
-                                        aria-hidden="true"
-                                        className="absolute top-7 left-1/2 -translate-x-1/2 w-44 h-44 rounded-full bg-black/[0.06] transition-transform duration-700 ease-out group-hover:scale-110"
-                                    />
-                                    {/* subtle baseline */}
-                                    <div
-                                        aria-hidden="true"
-                                        className="absolute bottom-0 left-6 right-6 h-px bg-black/10"
-                                    />
                                     <Image
                                         src="/me.png"
                                         alt="Yaroslav Efremov"
                                         width={600}
                                         height={580}
                                         priority
-                                        sizes="240px"
-                                        className="relative z-10 h-[272px] w-auto object-contain object-bottom drop-shadow-[0_12px_25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
+                                        sizes="(max-width: 640px) 320px, 360px"
+                                        className="h-auto w-[320px] sm:w-[360px] object-contain drop-shadow-[0_18px_35px_rgba(0,0,0,0.22)] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
                                     />
                                 </motion.div>
                             </Parallax>
