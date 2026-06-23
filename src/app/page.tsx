@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 import { Download, Github, Mail } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Icon } from "@iconify/react"
@@ -83,24 +84,34 @@ export default function Home() {
                 <div className="grid place-items-center min-h-screen relative z-10">
                     <div className="grid place-items-center gap-7">
                         {loading ? (
-                            <Skeleton circle width={200} height={200} />
+                            <Skeleton width={240} height={280} borderRadius="2rem" />
                         ) : (
                             <Parallax>
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5 }}
-                                    whileHover={{ scale: 1.05, rotate: -2 }}
-                                    className="rounded-full ring-1 ring-black/10 shadow-[0_0_0_8px_rgba(0,0,0,0.03)] transition-shadow hover:shadow-[0_0_40px_4px_rgba(0,0,0,0.15)]"
+                                    initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    className="group relative w-[240px] h-[280px] flex items-end justify-center overflow-hidden rounded-[2rem] border border-black/10 bg-gradient-to-b from-black/[0.04] to-transparent"
                                 >
-                                    <Avatar className="w-[200px] h-[200px] border-2 border-gray-200">
-                                        <AvatarImage
-                                            src="https://i.postimg.cc/90yLsQ2y/Picsart-24-11-02-23-55-46-822.png"
-                                            width={250}
-                                            height={1500}
-                                        />
-                                        <AvatarFallback>ЕЯ</AvatarFallback>
-                                    </Avatar>
+                                    {/* monochrome backdrop disc */}
+                                    <div
+                                        aria-hidden="true"
+                                        className="absolute top-7 left-1/2 -translate-x-1/2 w-44 h-44 rounded-full bg-black/[0.06] transition-transform duration-700 ease-out group-hover:scale-110"
+                                    />
+                                    {/* subtle baseline */}
+                                    <div
+                                        aria-hidden="true"
+                                        className="absolute bottom-0 left-6 right-6 h-px bg-black/10"
+                                    />
+                                    <Image
+                                        src="/me.png"
+                                        alt="Yaroslav Efremov"
+                                        width={600}
+                                        height={580}
+                                        priority
+                                        sizes="240px"
+                                        className="relative z-10 h-[272px] w-auto object-contain object-bottom drop-shadow-[0_12px_25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
+                                    />
                                 </motion.div>
                             </Parallax>
                         )}
