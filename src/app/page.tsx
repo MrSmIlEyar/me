@@ -1,8 +1,9 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { Download, Github, Mail } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Icon } from "@iconify/react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import Skeleton from "react-loading-skeleton"
@@ -25,7 +26,9 @@ import SectionDivider from "@/components/shared/SectionDivider"
 export default function Home() {
     const [loading, setLoading] = useState(true)
     const [progress, setProgress] = useState(0)
-    const [isSticky, setIsSticky] = useState(false)
+    const [showSwitcher, setShowSwitcher] = useState(false)
+    const [pinnedRight, setPinnedRight] = useState(false)
+    const [lightTheme, setLightTheme] = useState(false)
 
     const { t, i18n } = useTranslation()
 
@@ -43,16 +46,44 @@ export default function Home() {
         return () => clearTimeout(timer)
     }, [])
 
-    // хук под перемещение LanguageSwitcher
+    // рефы на прокручиваемые секции (для снап-скролла)
+    const careerSectionRef = useRef<HTMLDivElement | null>(null)
+    const hobbySectionRef = useRef<HTMLDivElement | null>(null)
+
+    // Управляем единым переключателем языка + сбрасываем внутренний скролл неактивных секций
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.pageYOffset
-            setIsSticky(scrollPosition > window.innerHeight)
+        if (loading) return
+        const career = careerSectionRef.current
+        const hobby = hobbySectionRef.current
+
+        const update = () => {
+            const vh = window.innerHeight || 1
+            // 0 — главная, 1 — карьера, 2 — хобби/цитаты
+            const activeIndex = Math.round(window.scrollY / vh)
+
+            // каждая неактивная секция возвращается в начало
+            if (career && activeIndex !== 1) career.scrollTop = 0
+            if (hobby && activeIndex !== 2) hobby.scrollTop = 0
+
+            const careerScrolled = career ? career.scrollTop > 40 : false
+            // переключатель появляется в блоке карьеры и дальше
+            setShowSwitcher(activeIndex >= 1)
+            // центрирован в начале карьеры, уезжает вправо при прокрутке и держится там дальше
+            setPinnedRight(activeIndex >= 2 || (activeIndex === 1 && careerScrolled))
+            // на белом фоне (хобби/цитаты) — инвертированная тема виджета
+            setLightTheme(activeIndex >= 2)
         }
 
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+        update()
+        window.addEventListener("scroll", update, { passive: true })
+        career?.addEventListener("scroll", update, { passive: true })
+        hobby?.addEventListener("scroll", update, { passive: true })
+        return () => {
+            window.removeEventListener("scroll", update)
+            career?.removeEventListener("scroll", update)
+            hobby?.removeEventListener("scroll", update)
+        }
+    }, [loading])
 
     const [ref, inView] = useInView({
         threshold: 0,
@@ -80,27 +111,52 @@ export default function Home() {
                 />
                 <Spotlight />
                 <Grain />
-                <div className="grid place-items-center min-h-screen relative z-10">
-                    <div className="grid place-items-center gap-7">
+                {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
+                <motion.div
+                    className="fixed top-3 inset-x-0 z-[60] px-4 flex"
+                    initial={false}
+                    animate={{ opacity: showSwitcher ? 1 : 0, y: showSwitcher ? 0 : -10 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    style={{ pointerEvents: showSwitcher ? "auto" : "none" }}
+                >
+                    <motion.div
+                        layout
+                        transition={{ type: "spring", stiffness: 220, damping: 28 }}
+                        className={pinnedRight ? "ml-auto" : "mx-auto"}
+                    >
+                        <div
+                            className={
+                                lightTheme
+                                    ? "rounded-xl bg-white/70 backdrop-blur-md ring-1 ring-black/20 shadow-lg"
+                                    : "rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg"
+                            }
+                        >
+                            <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
+                        </div>
+                    </motion.div>
+                </motion.div>
+                <section className="snap-start snap-always h-screen overflow-y-auto no-scrollbar relative z-10">
+                    <div className="min-h-screen grid place-items-center py-10">
+                        <div className="grid place-items-center gap-7">
                         {loading ? (
-                            <Skeleton circle width={200} height={200} />
+                            <Skeleton width={160} height={155} borderRadius="1rem" />
                         ) : (
                             <Parallax>
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5 }}
-                                    whileHover={{ scale: 1.05, rotate: -2 }}
-                                    className="rounded-full ring-1 ring-black/10 shadow-[0_0_0_8px_rgba(0,0,0,0.03)] transition-shadow hover:shadow-[0_0_40px_4px_rgba(0,0,0,0.15)]"
+                                    initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    className="group relative flex justify-center"
                                 >
-                                    <Avatar className="w-[200px] h-[200px] border-2 border-gray-200">
-                                        <AvatarImage
-                                            src="https://i.postimg.cc/90yLsQ2y/Picsart-24-11-02-23-55-46-822.png"
-                                            width={250}
-                                            height={1500}
-                                        />
-                                        <AvatarFallback>ЕЯ</AvatarFallback>
-                                    </Avatar>
+                                    <Image
+                                        src="/me.png"
+                                        alt="Yaroslav Efremov"
+                                        width={600}
+                                        height={580}
+                                        priority
+                                        sizes="(max-width: 640px) 160px, 180px"
+                                        className="h-auto w-[160px] sm:w-[180px] object-contain"
+                                    />
                                 </motion.div>
                             </Parallax>
                         )}
@@ -243,31 +299,25 @@ export default function Home() {
                             )}
                         </div>
                     </div>
-                </div>
+                    </div>
+                </section>
                 <motion.div
-                    className="mt-2 backdrop-blur-sm"
+                    ref={careerSectionRef}
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-black backdrop-blur-sm"
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.1, delay: 0.05 }}
                 >
+                    <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
-                        <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-5 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
-                            <div className="langDiv sticky flex top-2 z-10 w-full">
-                                <motion.div
-                                    layout
-                                    transition={{ type: "spring", stiffness: 220, damping: 28 }}
-                                    className={isSticky ? "ml-auto" : "mx-auto"}
-                                >
-                                    <LanguageSwitcher />
-                                </motion.div>
-                            </div>
-                            <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
+                        <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-4 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
+                                <motion.div style={{ opacity: careerOpacity, y: careerY }} className="space-y-4">
                                 <motion.div
                                     key={i18n.language}
                                     initial={{ opacity: 0, filter: "blur(10px)" }}
                                     animate={{ opacity: 1, filter: "blur(0px)" }}
                                     transition={{ duration: 0.45, ease: "easeOut" }}
-                                    className="space-y-4"
+                                    className="space-y-4 mt-16"
                                 >
                                     <SectionDivider title={t("AboutMeTitle")} light />
                                     <motion.div
@@ -412,13 +462,16 @@ export default function Home() {
                             </motion.div>
                         </div>
                     </Parallax>
+                    </div>
                 </motion.div>
                 <motion.div
-                    className="bg-white"
+                    ref={hobbySectionRef}
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                 >
+                    <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <motion.div
                             key={i18n.language}
@@ -498,6 +551,7 @@ export default function Home() {
                             </div>
                         </motion.div>
                     </Parallax>
+                    </div>
                 </motion.div>
             </div>
         </ParallaxProvider>
