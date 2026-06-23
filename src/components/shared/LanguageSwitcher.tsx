@@ -13,11 +13,12 @@ const LANGS = ["ru", "en"] as const
 
 const LanguageSwitcher: React.FC<Props> = ({ className }) => {
     const { i18n } = useTranslation()
-    const [currentLanguage, setCurrentLanguage] = React.useState(i18n.language?.startsWith("en") ? "en" : "ru")
+    const currentLanguage = i18n.language?.startsWith("en") ? "en" : "ru"
+    // уникальный id, чтобы несколько переключателей на странице не делили один layoutId
+    const pillId = React.useId()
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng)
-        setCurrentLanguage(lng)
     }
 
     return (
@@ -40,7 +41,7 @@ const LanguageSwitcher: React.FC<Props> = ({ className }) => {
                     >
                         {active && (
                             <motion.span
-                                layoutId="lang-pill"
+                                layoutId={`lang-pill-${pillId}`}
                                 className="absolute inset-0 rounded-lg bg-white"
                                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
                             />

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Download, Github, Mail } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -44,16 +44,47 @@ export default function Home() {
         return () => clearTimeout(timer)
     }, [])
 
-    // хук под перемещение LanguageSwitcher
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.pageYOffset
-            setIsSticky(scrollPosition > window.innerHeight)
-        }
+    // рефы на прокручиваемые секции (для снап-скролла как в рилсах)
+    const careerSectionRef = useRef<HTMLDivElement | null>(null)
+    const hobbySectionRef = useRef<HTMLDivElement | null>(null)
 
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+    // Сдвигаем переключатель языка вправо при внутренней прокрутке секции
+    useEffect(() => {
+        if (loading) return
+        const sections = [careerSectionRef.current, hobbySectionRef.current].filter(
+            (el): el is HTMLDivElement => Boolean(el),
+        )
+        const handlers: Array<[HTMLDivElement, () => void]> = []
+        sections.forEach((section) => {
+            const handler = () => setIsSticky(section.scrollTop > 40)
+            section.addEventListener("scroll", handler, { passive: true })
+            handlers.push([section, handler])
+        })
+        return () => handlers.forEach(([section, handler]) => section.removeEventListener("scroll", handler))
+    }, [loading])
+
+    // Сбрасываем внутренний скролл неактивных секций при смене (каждый раз в начало)
+    useEffect(() => {
+        if (loading) return
+        const handleWindowScroll = () => {
+            const vh = window.innerHeight || 1
+            // 0 — главная, 1 — карьера, 2 — хобби
+            const activeIndex = Math.round(window.scrollY / vh)
+            const sections: Array<[number, HTMLDivElement | null]> = [
+                [1, careerSectionRef.current],
+                [2, hobbySectionRef.current],
+            ]
+            sections.forEach(([index, section]) => {
+                if (section && index !== activeIndex) {
+                    section.scrollTop = 0
+                }
+            })
+            const active = sections.find(([index]) => index === activeIndex)?.[1]
+            setIsSticky(active ? active.scrollTop > 40 : false)
+        }
+        window.addEventListener("scroll", handleWindowScroll, { passive: true })
+        return () => window.removeEventListener("scroll", handleWindowScroll)
+    }, [loading])
 
     const [ref, inView] = useInView({
         threshold: 0,
@@ -248,6 +279,7 @@ export default function Home() {
                     </div>
                 </section>
                 <motion.div
+                    ref={careerSectionRef}
                     className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-black backdrop-blur-sm"
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
@@ -419,6 +451,7 @@ export default function Home() {
                     </div>
                 </motion.div>
                 <motion.div
+                    ref={hobbySectionRef}
                     className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -433,6 +466,15 @@ export default function Home() {
                             transition={{ duration: 0.45, ease: "easeOut" }}
                         >
                             <div className="grid gap-3 p-5">
+                                <div className="langDiv sticky flex top-2 z-10 w-full">
+                                    <motion.div
+                                        layout
+                                        transition={{ type: "spring", stiffness: 220, damping: 28 }}
+                                        className={isSticky ? "ml-auto" : "mx-auto"}
+                                    >
+                                        <LanguageSwitcher />
+                                    </motion.div>
+                                </div>
                                 <SectionDivider title={t("Hobby")} />
                                 <ul className="grid gap-3 sm:grid-cols-2">
 
