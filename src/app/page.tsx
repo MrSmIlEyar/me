@@ -100,7 +100,7 @@ export default function Home() {
                                         height={580}
                                         priority
                                         sizes="(max-width: 640px) 320px, 360px"
-                                        className="h-auto w-[320px] sm:w-[360px] object-contain drop-shadow-[0_18px_35px_rgba(0,0,0,0.22)] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
+                                        className="h-auto w-[320px] sm:w-[360px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03]"
                                     />
                                 </motion.div>
                             </Parallax>
