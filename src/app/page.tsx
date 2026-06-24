@@ -20,6 +20,7 @@ import Quote from "@/components/shared/Quote"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Spotlight from "@/components/shared/Spotlight"
 import Grain from "@/components/shared/Grain"
+import Backdrop from "@/components/shared/Backdrop"
 import Magnetic from "@/components/shared/Magnetic"
 import Tilt3D from "@/components/shared/Tilt3D"
 import SectionDivider from "@/components/shared/SectionDivider"
@@ -111,6 +112,7 @@ export default function Home() {
                     style={{ scaleX: progressScaleX }}
                 />
                 <Spotlight />
+                <Backdrop />
                 <Grain />
                 {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
                 <motion.div
