@@ -40,6 +40,18 @@ body {
     100% { transform: translate(2%, -3%); }
   }
 
+  /* Subtle dot-grid backdrop — uses currentColor so a blend mode can adapt it to light/dark */
+  .dot-grid {
+    background-image: radial-gradient(currentColor 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    background-position: center;
+  }
+
+  /* Soft vignette to add depth and gently focus the center */
+  .vignette {
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.06) 100%);
+  }
+
   /* Continuous monochrome shimmer that sweeps across text */
   .shimmer-text {
     background: linear-gradient(
