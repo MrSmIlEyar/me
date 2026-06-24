@@ -21,6 +21,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Spotlight from "@/components/shared/Spotlight"
 import Grain from "@/components/shared/Grain"
 import Magnetic from "@/components/shared/Magnetic"
+import Tilt3D from "@/components/shared/Tilt3D"
 import SectionDivider from "@/components/shared/SectionDivider"
 
 export default function Home() {
@@ -148,15 +149,17 @@ export default function Home() {
                                     transition={{ duration: 0.6, ease: "easeOut" }}
                                     className="group relative flex justify-center"
                                 >
-                                    <Image
-                                        src="/me.png"
-                                        alt="Yaroslav Efremov"
-                                        width={600}
-                                        height={580}
-                                        priority
-                                        sizes="(max-width: 640px) 160px, 180px"
-                                        className="h-auto w-[160px] sm:w-[180px] object-contain"
-                                    />
+                                    <Tilt3D max={16} lift={30}>
+                                        <Image
+                                            src="/me.png"
+                                            alt="Yaroslav Efremov"
+                                            width={600}
+                                            height={580}
+                                            priority
+                                            sizes="(max-width: 640px) 160px, 180px"
+                                            className="h-auto w-[160px] sm:w-[180px] object-contain"
+                                        />
+                                    </Tilt3D>
                                 </motion.div>
                             </Parallax>
                         )}
@@ -227,7 +230,9 @@ export default function Home() {
                                     <a href="mailto:yaroslav.efrem@yandex.ru" target="_blank" rel="noreferrer">
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
-                                                <Mail width={32} height={32} className="fade-in" />
+                                                <Magnetic strength={0.6} className="cursor-pointer">
+                                                    <Mail width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
                                                 <div className="flex gap-1 items-center">
@@ -242,7 +247,9 @@ export default function Home() {
                                     <a href="https://github.com/MrSmIlEyar" target="_blank" rel="noreferrer">
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
-                                                <Github width={32} height={32} className="fade-in" />
+                                                <Magnetic strength={0.6} className="cursor-pointer">
+                                                    <Github width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
                                                 <div className="flex gap-2 items-center">
@@ -257,7 +264,9 @@ export default function Home() {
                                     <a href="https://t.me/ggrraachh" target="_blank" rel="noreferrer">
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
-                                                <Icon icon="line-md:telegram" width={32} height={32} className="fade-in" />
+                                                <Magnetic strength={0.6} className="cursor-pointer">
+                                                    <Icon icon="line-md:telegram" width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
                                                 <div className="flex gap-2 items-center">
