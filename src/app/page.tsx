@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from "react"
-import Image from "next/image"
 import { Download, Github, Mail } from "lucide-react"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Icon } from "@iconify/react"
@@ -23,6 +22,8 @@ import Grain from "@/components/shared/Grain"
 import Backdrop from "@/components/shared/Backdrop"
 import Magnetic from "@/components/shared/Magnetic"
 import Tilt3D from "@/components/shared/Tilt3D"
+import AsciiPortrait from "@/components/shared/AsciiPortrait"
+import InvertLens from "@/components/shared/InvertLens"
 import SectionDivider from "@/components/shared/SectionDivider"
 
 export default function Home() {
@@ -114,6 +115,7 @@ export default function Home() {
                 <Spotlight />
                 <Backdrop />
                 <Grain />
+                <InvertLens />
                 {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
                 <motion.div
                     className="fixed top-3 inset-x-0 z-[60] px-4 flex"
@@ -152,14 +154,13 @@ export default function Home() {
                                     className="group relative flex justify-center"
                                 >
                                     <Tilt3D max={16} lift={30}>
-                                        <Image
+                                        <AsciiPortrait
                                             src="/me.png"
                                             alt="Yaroslav Efremov"
-                                            width={600}
-                                            height={580}
                                             priority
                                             sizes="(max-width: 640px) 160px, 180px"
-                                            className="h-auto w-[160px] sm:w-[180px] object-contain"
+                                            className="w-[160px] sm:w-[180px]"
+                                            imageClassName="h-auto w-full object-contain"
                                         />
                                     </Tilt3D>
                                 </motion.div>
