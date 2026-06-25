@@ -18,6 +18,11 @@ interface Props {
 // Dark -> light ramp. White / transparent pixels map to a space.
 const RAMP = "@#MW%8&Bao+=~-:. "
 
+// Monospace glyph advance width relative to its line-height (≈0.6em wide per 1em tall).
+// Used for BOTH the row count and the font sizing so the ASCII block fills the
+// exact same box as the photo (otherwise the text appears shorter on hover).
+const CHAR_RATIO = 0.6
+
 /**
  * Portrait that "scatters" into ASCII art on hover and re-assembles on leave.
  * The ASCII is computed once from the image pixels (via an offscreen canvas)
@@ -46,8 +51,7 @@ const AsciiPortrait: React.FC<Props> = ({
         img.src = src
         img.onload = () => {
             if (cancelled) return
-            const charAspect = 0.5 // monospace glyphs are ~2x taller than wide
-            const rows = Math.max(1, Math.round((cols * (img.height / img.width)) * charAspect))
+            const rows = Math.max(1, Math.round(cols * (img.height / img.width) * CHAR_RATIO))
             const canvas = document.createElement("canvas")
             canvas.width = cols
             canvas.height = rows
@@ -82,8 +86,8 @@ const AsciiPortrait: React.FC<Props> = ({
     const measure = useCallback(() => {
         const el = wrapperRef.current
         if (!el) return
-        // monospace char width ≈ 0.6 * font-size
-        setFontSize(el.clientWidth / (cols * 0.6))
+        // monospace char advance width ≈ CHAR_RATIO * font-size
+        setFontSize(el.clientWidth / (cols * CHAR_RATIO))
     }, [cols])
 
     useEffect(() => {
