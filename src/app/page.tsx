@@ -25,6 +25,7 @@ import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
 import InvertLens from "@/components/shared/InvertLens"
 import SectionDivider from "@/components/shared/SectionDivider"
+import CareerTimeline from "@/components/shared/CareerTimeline"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -354,122 +355,7 @@ export default function Home() {
                                     </motion.div>
                                     <p className="leading-relaxed text-white/90">{t("AboutMe")}</p>
                                     <SectionDivider title={t("Career")} light />
-                                    <motion.ul className="relative ml-1 space-y-2 border-l border-white/20 pl-5">
-                                        {["SLON", "Megamailer", t("Dyva")].map((item, index) => (
-                                            <motion.li
-                                                key={item}
-                                                className="relative space-y-3 py-3 pr-3 origin-left"
-                                                initial={{ opacity: 0, x: -28 }}
-                                                whileInView={{ opacity: 1, x: 0 }}
-                                                viewport={{ once: true, amount: 0.3 }}
-                                                transition={{ duration: 0.4, delay: index * 0.08 }}
-                                                whileHover={{ scale: 1.03 }}
-                                            >
-                                                <span
-                                                    aria-hidden="true"
-                                                    className="absolute -left-[25px] top-[18px] h-2.5 w-2.5 rounded-full bg-white ring-4 ring-black"
-                                                />
-                                                <div className="flex gap-2 items-center font-bold text-lg">
-                                                    {item}
-                                                </div>
-                                                {item === "SLON" && (
-                                                    <ul className="ml-2 space-y-1 space-x-3">
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm ml-3">
-                                                                <Icon icon="icomoon-free:info"
-                                                                    className="flex-shrink-0" /> {t("SlonAbout")}
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm">
-                                                                <Icon icon="formkit:datetime" /> {t("SlonTime")}
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-start text-sm">
-                                                                <Icon icon="icon-park-outline:instruction"
-                                                                    className="flex-shrink-0 mt-0.5" />
-                                                                <div className="grid gap-1">
-                                                                    <p><span className="font-medium">Backend:</span> Bash, aiogram</p>
-                                                                    <p><span className="font-medium">DB-system:</span> MariaDB, Prisma</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm">
-                                                                <Icon icon="line-md:telegram" />{" "}
-                                                                <a href="https://t.me/slonrobot" className="underline">
-                                                                    @slonrobot
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                )}
-                                                {item === "Megamailer" && (
-                                                    <ul className="ml-2 space-y-1 space-x-3">
-                                                        <li>
-                                                            <div className="flex gap-2 items-baseline text-sm ml-3">
-                                                                <Icon icon="icomoon-free:info" className="flex-shrink-0" /> {t("MegamailerAbout")}
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm">
-                                                                <Icon icon="formkit:datetime" className="flex-shrink-0" /> {t("MegamailerTime")}
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-start text-sm">
-                                                                <Icon icon="icon-park-outline:instruction" className="flex-shrink-0 mt-0.5" />
-                                                                <div className="grid gap-1">
-                                                                    <p><span className="font-medium">Backend:</span> Django, Flask</p>
-                                                                    <p><span className="font-medium">Frontend:</span> React</p>
-                                                                    <p><span className="font-medium">DB-system:</span> PostgreSQL, MySQL</p>
-                                                                    <p><span className="font-medium">Deployment:</span> Docker</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                )}
-                                                {item === t("Dyva") && (
-                                                    <ul className="ml-2 space-y-1 space-x-3">
-                                                        <li>
-                                                            <div className="flex md:items-center gap-2 items-baseline text-sm ml-3">
-                                                                <Icon icon="icomoon-free:info" className="flex-shrink-0" />
-                                                                <div className="flex-1 leading-tight">
-                                                                    <p>{t("DyvaAbout")}</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm">
-                                                                <Icon icon="formkit:datetime" />
-                                                                <p>{t("DyvaTime")}</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-start text-sm">
-                                                                <Icon icon="icon-park-outline:instruction" className="flex-shrink-0 mt-0.5" />
-                                                                <div className="grid gap-1">
-                                                                    <p><span className="font-medium">Backend:</span> Django, Redis, Memcached, Celery, OpenAPI</p>
-                                                                    <p><span className="font-medium">Frontend:</span> TypeScript, React, NextJS</p>
-                                                                    <p><span className="font-medium">DB-system:</span> PostgreSQL, S3</p>
-                                                                    <p><span className="font-medium">Deployment:</span> Kubernetes, Helm, Docker, Gitlab CI/CD</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div className="flex gap-2 items-center text-sm">
-                                                                <Icon icon="material-symbols:link" />{" "}
-                                                                <a href="https://dyva.site/" className="underline">
-                                                                    {t("DyvaLink")}
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                )}
-                                            </motion.li>
-                                        ))}
-                                    </motion.ul>
+                                    <CareerTimeline t={t} />
                                 </motion.div>
                             </motion.div>
                         </div>
