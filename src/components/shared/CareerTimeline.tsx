@@ -102,7 +102,7 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
 
                         {/* elevated glass card */}
                         <motion.div
-                            className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] p-4 backdrop-blur-sm transition-colors duration-300 hover:border-white/40"
+                            className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] p-3.5 backdrop-blur-sm transition-colors duration-300 hover:border-white/40 sm:p-4"
                             whileHover={{ y: -4, scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 280, damping: 22 }}
                         >
@@ -112,9 +112,9 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
                                 className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
                             />
 
-                            <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                                 <h3 className="text-lg font-bold tracking-tight">{job.title}</h3>
-                                <span className="flex items-center gap-1.5 rounded-full border border-white/20 px-2.5 py-0.5 text-xs text-white/80">
+                                <span className="flex items-center gap-1.5 rounded-full border border-white/20 px-2.5 py-0.5 text-xs text-white/80 sm:ml-auto">
                                     <Icon icon="formkit:datetime" className="shrink-0" />
                                     {t(job.timeKey)}
                                 </span>
@@ -125,20 +125,22 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
                                 <p>{t(job.aboutKey)}</p>
                             </div>
 
-                            <div className="mt-3 space-y-2">
+                            <div className="mt-3 space-y-2.5">
                                 {job.stacks.map((group) => (
-                                    <div key={group.label} className="flex flex-wrap items-center gap-1.5">
-                                        <span className="mr-1 text-xs font-medium uppercase tracking-wide text-white/50">
+                                    <div key={group.label} className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-2">
+                                        <span className="text-[11px] font-medium uppercase tracking-wide text-white/50 sm:w-24 sm:shrink-0">
                                             {group.label}
                                         </span>
-                                        {group.items.map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="rounded-md border border-white/15 bg-white/5 px-2 py-0.5 text-xs text-white/90 transition-colors duration-200 hover:border-white/50 hover:bg-white hover:text-black"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {group.items.map((tech) => (
+                                                <span
+                                                    key={tech}
+                                                    className="rounded-md border border-white/15 bg-white/5 px-2 py-0.5 text-xs text-white/90 transition-colors duration-200 hover:border-white/50 hover:bg-white hover:text-black"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

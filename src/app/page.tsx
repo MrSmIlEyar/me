@@ -23,7 +23,6 @@ import Backdrop from "@/components/shared/Backdrop"
 import Magnetic from "@/components/shared/Magnetic"
 import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
-import InvertLens from "@/components/shared/InvertLens"
 import SectionDivider from "@/components/shared/SectionDivider"
 import CareerTimeline from "@/components/shared/CareerTimeline"
 
@@ -116,7 +115,6 @@ export default function Home() {
                 <Spotlight />
                 <Backdrop />
                 <Grain />
-                <InvertLens />
                 {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
                 <motion.div
                     className="fixed top-3 inset-x-0 z-[60] px-4 flex"
