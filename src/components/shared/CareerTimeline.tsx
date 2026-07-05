@@ -71,12 +71,12 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
 
     return (
         <div ref={lineRef} className="relative ml-1 pl-7">
-            {/* faint static rail */}
-            <div aria-hidden="true" className="absolute left-0 top-2 bottom-2 w-px bg-white/15" />
+            {/* faint static rail — starts at the first node so there is no orphan stub above it */}
+            <div aria-hidden="true" className="absolute left-0 top-6 bottom-6 w-px bg-white/15" />
             {/* animated rail that draws on scroll */}
             <motion.div
                 aria-hidden="true"
-                className="absolute left-0 top-2 bottom-2 w-px origin-top bg-white"
+                className="absolute left-0 top-6 bottom-6 w-px origin-top bg-white"
                 style={{ scaleY: lineScaleY, opacity: lineGlow, boxShadow: "0 0 8px rgba(255,255,255,0.8)" }}
             />
 
@@ -114,9 +114,9 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
 
                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                                 <h3 className="text-lg font-bold tracking-tight">{job.title}</h3>
-                                <span className="flex items-center gap-1.5 rounded-full border border-white/20 px-2.5 py-0.5 text-xs text-white/80 sm:ml-auto">
+                                <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-white/20 px-2.5 py-0.5 text-xs leading-tight text-white/80 sm:ml-auto">
                                     <Icon icon="formkit:datetime" className="shrink-0" />
-                                    {t(job.timeKey)}
+                                    <span className="min-w-0">{t(job.timeKey)}</span>
                                 </span>
                             </div>
 
