@@ -431,7 +431,8 @@ export default function Home() {
                                         <Github width={13} height={13} className="transition-transform duration-300 group-hover:rotate-12" />
                                         <span className="link-underline">source code</span>
                                     </a>
-                                    <a
+                                    <button
+                                        type="button"
                                         onClick={() => {
                                             window.scrollTo({
                                                 top: 0,
@@ -442,7 +443,7 @@ export default function Home() {
                                     >
                                         <Icon icon="simple-line-icons:arrow-up" className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                                         <span className="link-underline">back to top</span>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </motion.div>

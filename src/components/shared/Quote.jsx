@@ -9,58 +9,59 @@ import {useTranslation} from 'react-i18next';
 import {motion, AnimatePresence} from 'framer-motion';
 import Magnetic from '@/components/shared/Magnetic';
 
+const pickRandom = (list) => {
+    if (list.length === 0) return null;
+    let randomIndex = Math.floor(Math.random() * list.length);
+    if (randomIndex === 0) {
+        randomIndex = Math.min(1, list.length - 1);
+    }
+    return list[randomIndex];
+};
+
 const Quote = () => {
     const [quote, setQuote] = useState({text: '', author: ''});
     const [loading, setLoading] = useState(true);
     const [quotes, setQuotes] = useState([]);
 
-    const { i18n , t} = useTranslation();
-    let response = '';
-    let language = i18n.language;
-    const fetchQuotes = async () => {
-        setLoading(true);
-        try {
-            if (language === 'en') {
-                response = await axios.get('quotesEn.csv');
+    const { i18n, t } = useTranslation();
+    const language = i18n.language;
 
-            } else {
-                response = await axios.get('quotesRu.csv');
+    useEffect(() => {
+        let cancelled = false;
+        const fetchQuotes = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(language === 'en' ? 'quotesEn.csv' : 'quotesRu.csv');
+                Papa.parse(response.data, {
+                    header: false,
+                    complete: (results) => {
+                        if (cancelled) return;
+                        const parsed = results.data.map(row => ({author: row[0], text: row[1]}));
+                        setQuotes(parsed);
+                        const first = pickRandom(parsed);
+                        if (first) setQuote(first);
+                        setLoading(false);
+                    },
+                    error: (error) => {
+                        console.error('Error parsing CSV:', error);
+                        if (!cancelled) setLoading(false);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching quotes:', error);
+                if (!cancelled) setLoading(false);
             }
-            Papa.parse(response.data, {
-                header: false,
-                complete: (results) => {
-                    setQuotes(results.data.map(row => ({author: row[0], text: row[1]})));
-                    setLoading(false);
-                },
-                error: (error) => {
-                    console.error('Error parsing CSV:', error);
-                    setLoading(false);
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching quotes:', error);
-            setLoading(false);
-        }
-    };
+        };
+        fetchQuotes();
+        return () => {
+            cancelled = true;
+        };
+    }, [language]);
 
     const getRandomQuote = () => {
-        if (quotes.length === 0) return;
-        let randomIndex = Math.floor(Math.random() * quotes.length);
-        if (randomIndex === 0) {
-            randomIndex = 1;
-        }
-        setQuote(quotes[randomIndex]);
+        const next = pickRandom(quotes);
+        if (next) setQuote(next);
     };
-
-    useEffect(() => {
-        fetchQuotes();
-    }, [t]);
-
-    useEffect(() => {
-        if (quotes.length > 0) {
-            getRandomQuote();
-        }
-    }, [quotes]);
 
     if (loading) {
         return <div><Icon icon="line-md:loading-loop"/></div>;
