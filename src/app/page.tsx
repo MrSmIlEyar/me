@@ -25,6 +25,7 @@ import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
 import SectionDivider from "@/components/shared/SectionDivider"
 import CareerTimeline from "@/components/shared/CareerTimeline"
+import GlassDock from "@/components/shared/GlassDock"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -115,6 +116,7 @@ export default function Home() {
                 <Spotlight />
                 <Backdrop />
                 <Grain />
+                <GlassDock t={t} />
                 {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
                 <motion.div
                     className="fixed top-3 inset-x-0 z-[60] px-4 flex"
