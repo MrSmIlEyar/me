@@ -25,6 +25,7 @@ import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
 import SectionDivider from "@/components/shared/SectionDivider"
 import CareerTimeline from "@/components/shared/CareerTimeline"
+import SmartThemeBoundary from "@/components/shared/SmartThemeBoundary"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -313,12 +314,13 @@ export default function Home() {
                     </div>
                 </section>
                 <motion.div
-                    ref={careerSectionRef}
-                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-black backdrop-blur-sm"
+                    className="relative isolate snap-start snap-always h-screen bg-black"
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.1, delay: 0.05 }}
                 >
+                    <SmartThemeBoundary tone="dark" />
+                    <div ref={careerSectionRef} className="relative z-10 h-full overflow-y-auto no-scrollbar backdrop-blur-sm">
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-4 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
@@ -359,14 +361,16 @@ export default function Home() {
                         </div>
                     </Parallax>
                     </div>
+                    </div>
                 </motion.div>
                 <motion.div
-                    ref={hobbySectionRef}
-                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-white"
+                    className="relative isolate snap-start snap-always h-screen bg-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                 >
+                    <SmartThemeBoundary tone="light" />
+                    <div ref={hobbySectionRef} className="relative z-10 h-full overflow-y-auto no-scrollbar">
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <motion.div
@@ -448,6 +452,7 @@ export default function Home() {
                             </div>
                         </motion.div>
                     </Parallax>
+                    </div>
                     </div>
                 </motion.div>
             </div>
