@@ -25,7 +25,7 @@ import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
 import SectionDivider from "@/components/shared/SectionDivider"
 import CareerTimeline from "@/components/shared/CareerTimeline"
-import { sheenHandlers } from "@/lib/use-sheen"
+import GlassDock from "@/components/shared/GlassDock"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -116,6 +116,7 @@ export default function Home() {
                 <Spotlight />
                 <Backdrop />
                 <Grain />
+                <GlassDock t={t} />
                 {/* единый переключатель языка: появляется в карьере по центру, уезжает вправо и держится в углу */}
                 <motion.div
                     className="fixed top-3 inset-x-0 z-[60] px-4 flex"
@@ -129,7 +130,15 @@ export default function Home() {
                         transition={{ type: "spring", stiffness: 220, damping: 28 }}
                         className={pinnedRight ? "ml-auto" : "mx-auto"}
                     >
-                        <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
+                        <div
+                            className={
+                                lightTheme
+                                    ? "rounded-xl bg-white/70 backdrop-blur-md ring-1 ring-black/20 shadow-lg"
+                                    : "rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg"
+                            }
+                        >
+                            <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
+                        </div>
                     </motion.div>
                 </motion.div>
                 <section className="snap-start snap-always h-screen overflow-y-auto no-scrollbar relative z-10">
@@ -226,12 +235,7 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <span
-                                                        {...sheenHandlers}
-                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
-                                                    >
-                                                        <Mail width={20} height={20} className="relative" />
-                                                    </span>
+                                                    <Mail width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -248,12 +252,7 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <span
-                                                        {...sheenHandlers}
-                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
-                                                    >
-                                                        <Github width={20} height={20} className="relative" />
-                                                    </span>
+                                                    <Github width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -270,12 +269,7 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <span
-                                                        {...sheenHandlers}
-                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
-                                                    >
-                                                        <Icon icon="line-md:telegram" width={20} height={20} className="relative" />
-                                                    </span>
+                                                    <Icon icon="line-md:telegram" width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -300,14 +294,14 @@ export default function Home() {
                                         href="/CV_Fullstack_Developer.pdf"
                                         download="CV_Fullstack_Developer.pdf"
                                         target="_blank"
-                                        {...sheenHandlers}
-                                        className="glass glass-sheen glass-press group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-black"
-                                        whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-                                        whileTap={{ scale: 0.96 }}
+                                        className="group relative flex gap-2 overflow-hidden bg-black text-white p-2 px-4 rounded-xl"
+                                        whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                                        whileTap={{ scale: 0.95 }}
                                         rel="noreferrer"
                                     >
-                                        <Download width={18} height={18} className="relative shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
-                                        <span className="relative text-sm font-medium">Download CV</span>
+                                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                                        <Download className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="relative">Download CV</span>
                                     </motion.a>
                                 </Magnetic>
                             )}
@@ -388,8 +382,7 @@ export default function Home() {
                                 <ul className="grid gap-3 sm:grid-cols-2">
 
                                     <motion.li
-                                        {...sheenHandlers}
-                                        className="glass glass-sheen group overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 sm:col-span-2"
+                                        className="group relative overflow-hidden rounded-xl border border-black/15 p-4 transition-all duration-300 hover:border-black hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 sm:col-span-2"
                                         initial={{ opacity: 0, y: 24 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, amount: 0.5 }}
@@ -423,7 +416,7 @@ export default function Home() {
                                 <div className="flex items-center h-1.5">
                                     <div className="flex-grow h-px bg-black"></div>
                                 </div>
-                                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-10">
+                                <div className="flex items-center justify-center gap-10">
                                     <MetrikaCounter
                                         id={98695129}
                                         options={{
@@ -434,12 +427,11 @@ export default function Home() {
                                     <a
                                         href="https://github.com/MrSmIlEyar/me"
                                         target="_blank"
-                                        {...sheenHandlers}
-                                        className="glass glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px]"
+                                        className="group text-[12px] flex gap-1 justify-center items-center"
                                         rel="noreferrer"
                                     >
-                                        <Github width={13} height={13} className="relative shrink-0 transition-transform duration-300 group-hover:rotate-12" />
-                                        <span className="relative whitespace-nowrap">source code</span>
+                                        <Github width={13} height={13} className="transition-transform duration-300 group-hover:rotate-12" />
+                                        <span className="link-underline">source code</span>
                                     </a>
                                     <button
                                         type="button"
@@ -449,11 +441,10 @@ export default function Home() {
                                                 behavior: "smooth",
                                             })
                                         }}
-                                        {...sheenHandlers}
-                                        className="glass glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] hover:cursor-pointer"
+                                        className="group text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center"
                                     >
-                                        <Icon icon="simple-line-icons:arrow-up" className="relative shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
-                                        <span className="relative whitespace-nowrap">back to top</span>
+                                        <Icon icon="simple-line-icons:arrow-up" className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="link-underline">back to top</span>
                                     </button>
                                 </div>
                             </div>

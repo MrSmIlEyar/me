@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react"
 import { Icon } from "@iconify/react"
-import { sheenHandlers } from "@/lib/use-sheen"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import type { TFunction } from "i18next"
 
@@ -101,13 +100,35 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
                             <span className="relative inline-flex h-3 w-3 rounded-full bg-white ring-4 ring-black" />
                         </span>
 
-                        {/* liquid glass card — same surface system as the page buttons */}
+                        {/* liquid glass card */}
                         <motion.div
-                            {...sheenHandlers}
-                            className="glass-dark glass-sheen group overflow-hidden rounded-2xl p-3.5 transition-colors duration-300 hover:border-white/40 sm:p-4"
+                            className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.10] to-white/[0.03] p-3.5 backdrop-blur-xl transition-colors duration-300 hover:border-white/40 sm:p-4"
                             whileHover={{ y: -4, scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                            onMouseMove={(e) => {
+                                const el = e.currentTarget
+                                const r = el.getBoundingClientRect()
+                                el.style.setProperty("--sx", `${e.clientX - r.left}px`)
+                                el.style.setProperty("--sy", `${e.clientY - r.top}px`)
+                                el.style.setProperty("--so", "1")
+                            }}
+                            onMouseLeave={(e) => e.currentTarget.style.setProperty("--so", "0")}
                         >
+                            {/* light top rim — signature glass edge */}
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                            />
+                            {/* specular highlight that follows the cursor */}
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 opacity-[var(--so,0)] transition-opacity duration-300"
+                                style={{
+                                    background:
+                                        "radial-gradient(140px circle at var(--sx, 50%) var(--sy, 50%), rgba(255,255,255,0.12), transparent 70%)",
+                                }}
+                            />
+
                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                                 <h3 className="text-lg font-bold tracking-tight">{job.title}</h3>
                                 <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-white/20 px-2.5 py-0.5 text-xs leading-tight text-white/80 sm:ml-auto">

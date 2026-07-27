@@ -8,7 +8,6 @@ import '@/i18n';
 import {useTranslation} from 'react-i18next';
 import {motion, AnimatePresence} from 'framer-motion';
 import Magnetic from '@/components/shared/Magnetic';
-import {sheenHandlers} from '@/lib/use-sheen';
 
 const pickRandom = (list) => {
     if (list.length === 0) return null;
@@ -95,14 +94,11 @@ const Quote = () => {
             </div>
             <Magnetic strength={0.4}>
                 <motion.button
-                    whileHover={{scale: 1.04}}
-                    whileTap={{scale: 0.96}}
-                    {...sheenHandlers}
-                    className="glass glass-sheen glass-press group flex justify-self-center gap-2 items-center justify-center overflow-hidden rounded-full px-5 py-2.5 text-sm font-medium text-black"
+                    whileTap={{scale: 0.95}}
+                    className="group relative overflow-hidden flex justify-self-center gap-2 items-center justify-center bg-black text-white p-2 px-4 rounded-xl h-[4vh]"
                     onClick={getRandomQuote}>
-                    <Icon icon="mdi:format-quote-open" className="relative shrink-0"/>
-                    <span className="relative whitespace-nowrap">{t('NewQuote')}</span>
-                    <Icon icon="mdi:format-quote-close" className="relative shrink-0"/>
+                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full"/>
+                    <Icon icon="mdi:format-quote-open"/> {t('NewQuote')} <Icon icon="mdi:format-quote-close"/>
                 </motion.button>
             </Magnetic>
         </div>
