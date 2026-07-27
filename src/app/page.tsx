@@ -228,7 +228,7 @@ export default function Home() {
                                                 <Magnetic strength={0.6} className="cursor-pointer">
                                                     <span
                                                         {...sheenHandlers}
-                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
                                                     >
                                                         <Mail width={20} height={20} className="relative" />
                                                     </span>
@@ -250,7 +250,7 @@ export default function Home() {
                                                 <Magnetic strength={0.6} className="cursor-pointer">
                                                     <span
                                                         {...sheenHandlers}
-                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
                                                     >
                                                         <Github width={20} height={20} className="relative" />
                                                     </span>
@@ -272,7 +272,7 @@ export default function Home() {
                                                 <Magnetic strength={0.6} className="cursor-pointer">
                                                     <span
                                                         {...sheenHandlers}
-                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                        className="glass glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
                                                     >
                                                         <Icon icon="line-md:telegram" width={20} height={20} className="relative" />
                                                     </span>
@@ -301,7 +301,7 @@ export default function Home() {
                                         download="CV_Fullstack_Developer.pdf"
                                         target="_blank"
                                         {...sheenHandlers}
-                                        className="glass-on-light glass-sheen glass-press group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5"
+                                        className="glass glass-sheen glass-press group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-black"
                                         whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
                                         whileTap={{ scale: 0.96 }}
                                         rel="noreferrer"
@@ -389,7 +389,7 @@ export default function Home() {
 
                                     <motion.li
                                         {...sheenHandlers}
-                                        className="glass-on-light glass-sheen group overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 sm:col-span-2"
+                                        className="glass glass-sheen group overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 sm:col-span-2"
                                         initial={{ opacity: 0, y: 24 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, amount: 0.5 }}
@@ -398,7 +398,7 @@ export default function Home() {
                                         <Icon
                                             icon="mdi:usb-flash-drive"
                                             aria-hidden="true"
-                                            className="pointer-events-none absolute -right-3 -bottom-3 text-white/10 transition-all duration-500 group-hover:text-white/20 group-hover:scale-110"
+                                            className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
                                             width={88}
                                             height={88}
                                         />
@@ -407,7 +407,7 @@ export default function Home() {
                                                 <Icon icon="octicon:dot-16" />
                                                 {t("YrStore")}
                                             </div>
-                                            <div className="flex gap-2 items-center text-sm text-white/75 transition-transform duration-300 group-hover:translate-x-1">
+                                            <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
                                                 <Icon icon="mdi:usb-flash-drive" className="shrink-0" />{" "}
                                                 <a href="https://yr-store.ru" target="_blank" rel="noreferrer" className="link-underline">
                                                     {t("YrStoreLink")}
@@ -435,7 +435,7 @@ export default function Home() {
                                         href="https://github.com/MrSmIlEyar/me"
                                         target="_blank"
                                         {...sheenHandlers}
-                                        className="glass-on-light glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px]"
+                                        className="glass glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px]"
                                         rel="noreferrer"
                                     >
                                         <Github width={13} height={13} className="relative shrink-0 transition-transform duration-300 group-hover:rotate-12" />
@@ -450,7 +450,7 @@ export default function Home() {
                                             })
                                         }}
                                         {...sheenHandlers}
-                                        className="glass-on-light glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] hover:cursor-pointer"
+                                        className="glass glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] hover:cursor-pointer"
                                     >
                                         <Icon icon="simple-line-icons:arrow-up" className="relative shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
                                         <span className="relative whitespace-nowrap">back to top</span>
