@@ -6,7 +6,6 @@ const resources = {
         translation: {
             currentLanguage: 'en',
             AboutMeTitle: 'About me',
-            Home: 'Home',
             City: 'Kazan',
             Work: 'DyVa (Fullstack Developer)',
             AboutMe: 'I am a Fullstack developer with experience in various projects. I specialize in developing web applications using modern technologies such as React, TypeScript, Django, SQL, Docker and Nginx.',
@@ -45,7 +44,6 @@ const resources = {
         translation: {
             currentLanguage: 'ru',
             AboutMeTitle: 'О себе',
-            Home: 'Главная',
             City: 'Казань',
             Work: 'DyVa (Fullstack разработчик)',
             AboutMe: 'Я - Fullstack разработчик с опытом работы в различных проектах. Специализируюсь на разработке веб-приложений с использованием современных технологий, таких как React, TypeScript, Django, SQL, Docker и Nginx.',
