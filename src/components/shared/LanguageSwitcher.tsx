@@ -30,7 +30,8 @@ const LanguageSwitcher: React.FC<Props> = ({ className, theme = "dark" }) => {
             className={cn(
                 className,
                 "glass-sheen relative flex justify-center items-center gap-0.5 rounded-full p-1 text-[12px]",
-                isLight ? "glass" : "glass-dark",
+                // inverted glass: dark smoked on light sections, light frosted on the dark one
+                isLight ? "glass-on-light" : "glass-on-dark",
             )}
         >
             {LANGS.map((lng) => {
@@ -42,26 +43,15 @@ const LanguageSwitcher: React.FC<Props> = ({ className, theme = "dark" }) => {
                         aria-pressed={active}
                         className={cn(
                             "glass-press relative z-10 rounded-full px-2.5 py-1 uppercase tracking-wide transition-colors duration-300",
-                            active
-                                ? isLight
-                                    ? "text-black"
-                                    : "text-white"
-                                : isLight
-                                  ? "text-black/50 hover:text-black/80"
-                                  : "text-white/55 hover:text-white/85",
+                            // both glass variants are dark inside, so content stays light
+                            active ? "text-white" : "text-white/55 hover:text-white/85",
                         )}
                     >
                         {active && (
                             <motion.span
                                 aria-hidden="true"
                                 layoutId={`lang-pill-${pillId}`}
-                                className={cn(
-                                    "absolute inset-0 -z-10 rounded-full",
-                                    // the moving pill is itself a lens of brighter glass
-                                    isLight
-                                        ? "bg-white/85 shadow-[0_2px_8px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.95)]"
-                                        : "bg-white/22 shadow-[0_2px_8px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]",
-                                )}
+                                className="absolute inset-0 -z-10 rounded-full bg-white/22 shadow-[0_2px_8px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.45)]"
                                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
                             />
                         )}

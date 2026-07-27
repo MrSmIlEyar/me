@@ -72,45 +72,48 @@ body {
     100% { background-position: -200% 0; }
   }
 
-  /* ---- Liquid glass surface system (iOS-like) ----
-     .glass       — frosted panel on light backgrounds
-     .glass-dark  — frosted panel on dark backgrounds
+  /* ---- Liquid glass surface system (iOS-like), inverted against its section ----
+     .glass-on-light — DARK smoked glass, used on the white sections
+     .glass-on-dark  — LIGHT frosted glass, used on the black section
      Both get a bright top rim (::before) that reads as a real glass edge. */
-  .glass,
-  .glass-dark {
+  .glass-on-light,
+  .glass-on-dark {
     position: relative;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     isolation: isolate;
   }
 
-  .glass {
+  .glass-on-light {
     background-image: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0.42)
+      rgba(0, 0, 0, 0.84),
+      rgba(0, 0, 0, 0.62)
     );
-    border: 1px solid rgba(0, 0, 0, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     box-shadow:
-      0 8px 28px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      0 8px 28px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    /* smoked glass carries light content */
+    color: hsl(0 0% 100%);
   }
 
-  .glass-dark {
+  .glass-on-dark {
     background-image: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.14),
-      rgba(255, 255, 255, 0.05)
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.06)
     );
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow:
       0 8px 28px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: hsl(0 0% 100%);
   }
 
   /* Bright specular rim along the top edge */
-  .glass::before,
-  .glass-dark::before {
+  .glass-on-light::before,
+  .glass-on-dark::before {
     content: "";
     position: absolute;
     left: 12%;
@@ -119,11 +122,6 @@ body {
     height: 1px;
     pointer-events: none;
     border-radius: inherit;
-  }
-  .glass::before {
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.95), transparent);
-  }
-  .glass-dark::before {
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
   }
 
@@ -139,14 +137,7 @@ body {
     transition: opacity 0.3s ease;
     background: radial-gradient(
       120px circle at var(--sx, 50%) var(--sy, 50%),
-      rgba(255, 255, 255, 0.35),
-      transparent 68%
-    );
-  }
-  .glass-dark.glass-sheen::after {
-    background: radial-gradient(
-      120px circle at var(--sx, 50%) var(--sy, 50%),
-      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.22),
       transparent 70%
     );
   }

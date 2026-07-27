@@ -98,7 +98,7 @@ const Quote = () => {
                     whileHover={{scale: 1.04}}
                     whileTap={{scale: 0.96}}
                     {...sheenHandlers}
-                    className="glass glass-sheen glass-press group flex justify-self-center gap-2 items-center justify-center overflow-hidden rounded-full px-5 py-2.5 text-sm font-medium text-black"
+                    className="glass-on-light glass-sheen glass-press group flex justify-self-center gap-2 items-center justify-center overflow-hidden rounded-full px-5 py-2.5 text-sm font-medium"
                     onClick={getRandomQuote}>
                     <Icon icon="mdi:format-quote-open" className="relative shrink-0"/>
                     <span className="relative whitespace-nowrap">{t('NewQuote')}</span>

@@ -6,7 +6,7 @@ import type React from "react"
  * Cursor-tracked specular highlight for glass surfaces.
  * Spread onto any element that also has `.glass-sheen`:
  *
- *   <button className="glass glass-sheen" {...sheenHandlers}>
+ *   <button className="glass-on-light glass-sheen" {...sheenHandlers}>
  *
  * Writes --sx / --sy (cursor position) and --so (opacity) as inline
  * custom properties, so the CSS in globals.css does the painting.
