@@ -104,7 +104,7 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
                         {/* liquid glass card — same surface system as the page buttons */}
                         <motion.div
                             {...sheenHandlers}
-                            className="glass-on-dark glass-sheen group overflow-hidden rounded-2xl p-3.5 transition-colors duration-300 hover:border-white/40 sm:p-4"
+                            className="glass-dark glass-sheen group overflow-hidden rounded-2xl p-3.5 transition-colors duration-300 hover:border-white/40 sm:p-4"
                             whileHover={{ y: -4, scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 280, damping: 22 }}
                         >
