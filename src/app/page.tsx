@@ -25,7 +25,7 @@ import Tilt3D from "@/components/shared/Tilt3D"
 import AsciiPortrait from "@/components/shared/AsciiPortrait"
 import SectionDivider from "@/components/shared/SectionDivider"
 import CareerTimeline from "@/components/shared/CareerTimeline"
-import SmartThemeBoundary from "@/components/shared/SmartThemeBoundary"
+import { sheenHandlers } from "@/lib/use-sheen"
 
 export default function Home() {
     const [loading, setLoading] = useState(true)
@@ -129,15 +129,7 @@ export default function Home() {
                         transition={{ type: "spring", stiffness: 220, damping: 28 }}
                         className={pinnedRight ? "ml-auto" : "mx-auto"}
                     >
-                        <div
-                            className={
-                                lightTheme
-                                    ? "rounded-xl bg-white/70 backdrop-blur-md ring-1 ring-black/20 shadow-lg"
-                                    : "rounded-xl bg-black/70 backdrop-blur-md ring-1 ring-white/20 shadow-lg"
-                            }
-                        >
-                            <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
-                        </div>
+                        <LanguageSwitcher theme={lightTheme ? "light" : "dark"} />
                     </motion.div>
                 </motion.div>
                 <section className="snap-start snap-always h-screen overflow-y-auto no-scrollbar relative z-10">
@@ -234,7 +226,12 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <Mail width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                    <span
+                                                        {...sheenHandlers}
+                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                    >
+                                                        <Mail width={20} height={20} className="relative" />
+                                                    </span>
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -251,7 +248,12 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <Github width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                    <span
+                                                        {...sheenHandlers}
+                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                    >
+                                                        <Github width={20} height={20} className="relative" />
+                                                    </span>
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -268,7 +270,12 @@ export default function Home() {
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
                                                 <Magnetic strength={0.6} className="cursor-pointer">
-                                                    <Icon icon="line-md:telegram" width={32} height={32} className="fade-in transition-transform duration-300 hover:scale-125" />
+                                                    <span
+                                                        {...sheenHandlers}
+                                                        className="glass-on-light glass-sheen glass-press fade-in grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 hover:scale-110"
+                                                    >
+                                                        <Icon icon="line-md:telegram" width={20} height={20} className="relative" />
+                                                    </span>
                                                 </Magnetic>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-auto">
@@ -293,14 +300,14 @@ export default function Home() {
                                         href="/CV_Fullstack_Developer.pdf"
                                         download="CV_Fullstack_Developer.pdf"
                                         target="_blank"
-                                        className="group relative flex gap-2 overflow-hidden bg-black text-white p-2 px-4 rounded-xl"
-                                        whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                        whileTap={{ scale: 0.95 }}
+                                        {...sheenHandlers}
+                                        className="glass-on-light glass-sheen glass-press group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5"
+                                        whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+                                        whileTap={{ scale: 0.96 }}
                                         rel="noreferrer"
                                     >
-                                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                                        <Download className="transition-transform duration-300 group-hover:-translate-y-0.5" />
-                                        <span className="relative">Download CV</span>
+                                        <Download width={18} height={18} className="relative shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="relative text-sm font-medium">Download CV</span>
                                     </motion.a>
                                 </Magnetic>
                             )}
@@ -314,13 +321,12 @@ export default function Home() {
                     </div>
                 </section>
                 <motion.div
-                    className="relative isolate snap-start snap-always h-screen bg-black"
+                    ref={careerSectionRef}
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-black backdrop-blur-sm"
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.1, delay: 0.05 }}
                 >
-                    <SmartThemeBoundary tone="dark" />
-                    <div ref={careerSectionRef} className="relative z-10 h-full overflow-y-auto no-scrollbar backdrop-blur-sm">
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <div ref={ref} className={`grid gap-3 bg-black bg-opacity-85 text-white p-4 backdrop-blur-xl ${inView ? "fade-in" : ""}`}>
@@ -361,16 +367,14 @@ export default function Home() {
                         </div>
                     </Parallax>
                     </div>
-                    </div>
                 </motion.div>
                 <motion.div
-                    className="relative isolate snap-start snap-always h-screen bg-white"
+                    ref={hobbySectionRef}
+                    className="snap-start snap-always h-screen overflow-y-auto no-scrollbar bg-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                 >
-                    <SmartThemeBoundary tone="light" />
-                    <div ref={hobbySectionRef} className="relative z-10 h-full overflow-y-auto no-scrollbar">
                     <div className="min-h-screen flex flex-col justify-center">
                     <Parallax>
                         <motion.div
@@ -384,7 +388,8 @@ export default function Home() {
                                 <ul className="grid gap-3 sm:grid-cols-2">
 
                                     <motion.li
-                                        className="group relative overflow-hidden rounded-xl border border-black/15 p-4 transition-all duration-300 hover:border-black hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 sm:col-span-2"
+                                        {...sheenHandlers}
+                                        className="glass-on-light glass-sheen group overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 sm:col-span-2"
                                         initial={{ opacity: 0, y: 24 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, amount: 0.5 }}
@@ -393,7 +398,7 @@ export default function Home() {
                                         <Icon
                                             icon="mdi:usb-flash-drive"
                                             aria-hidden="true"
-                                            className="pointer-events-none absolute -right-3 -bottom-3 text-black/5 transition-all duration-500 group-hover:text-black/10 group-hover:scale-110"
+                                            className="pointer-events-none absolute -right-3 -bottom-3 text-white/10 transition-all duration-500 group-hover:text-white/20 group-hover:scale-110"
                                             width={88}
                                             height={88}
                                         />
@@ -402,7 +407,7 @@ export default function Home() {
                                                 <Icon icon="octicon:dot-16" />
                                                 {t("YrStore")}
                                             </div>
-                                            <div className="flex gap-2 items-center text-sm text-black/70 transition-transform duration-300 group-hover:translate-x-1">
+                                            <div className="flex gap-2 items-center text-sm text-white/75 transition-transform duration-300 group-hover:translate-x-1">
                                                 <Icon icon="mdi:usb-flash-drive" className="shrink-0" />{" "}
                                                 <a href="https://yr-store.ru" target="_blank" rel="noreferrer" className="link-underline">
                                                     {t("YrStoreLink")}
@@ -418,7 +423,7 @@ export default function Home() {
                                 <div className="flex items-center h-1.5">
                                     <div className="flex-grow h-px bg-black"></div>
                                 </div>
-                                <div className="flex items-center justify-center gap-10">
+                                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-10">
                                     <MetrikaCounter
                                         id={98695129}
                                         options={{
@@ -429,11 +434,12 @@ export default function Home() {
                                     <a
                                         href="https://github.com/MrSmIlEyar/me"
                                         target="_blank"
-                                        className="group text-[12px] flex gap-1 justify-center items-center"
+                                        {...sheenHandlers}
+                                        className="glass-on-light glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px]"
                                         rel="noreferrer"
                                     >
-                                        <Github width={13} height={13} className="transition-transform duration-300 group-hover:rotate-12" />
-                                        <span className="link-underline">source code</span>
+                                        <Github width={13} height={13} className="relative shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+                                        <span className="relative whitespace-nowrap">source code</span>
                                     </a>
                                     <button
                                         type="button"
@@ -443,16 +449,16 @@ export default function Home() {
                                                 behavior: "smooth",
                                             })
                                         }}
-                                        className="group text-[12px] hover:cursor-pointer flex gap-1 justify-center items-center"
+                                        {...sheenHandlers}
+                                        className="glass-on-light glass-sheen glass-press group flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] hover:cursor-pointer"
                                     >
-                                        <Icon icon="simple-line-icons:arrow-up" className="transition-transform duration-300 group-hover:-translate-y-0.5" />
-                                        <span className="link-underline">back to top</span>
+                                        <Icon icon="simple-line-icons:arrow-up" className="relative shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                                        <span className="relative whitespace-nowrap">back to top</span>
                                     </button>
                                 </div>
                             </div>
                         </motion.div>
                     </Parallax>
-                    </div>
                     </div>
                 </motion.div>
             </div>

@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react"
 import { Icon } from "@iconify/react"
+import { sheenHandlers } from "@/lib/use-sheen"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import type { TFunction } from "i18next"
 
@@ -100,18 +101,13 @@ const CareerTimeline: React.FC<Props> = ({ t }) => {
                             <span className="relative inline-flex h-3 w-3 rounded-full bg-white ring-4 ring-black" />
                         </span>
 
-                        {/* elevated glass card */}
+                        {/* liquid glass card — same surface system as the page buttons */}
                         <motion.div
-                            className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] p-3.5 backdrop-blur-sm transition-colors duration-300 hover:border-white/40 sm:p-4"
+                            {...sheenHandlers}
+                            className="glass-on-dark glass-sheen group overflow-hidden rounded-2xl p-3.5 transition-colors duration-300 hover:border-white/40 sm:p-4"
                             whileHover={{ y: -4, scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 280, damping: 22 }}
                         >
-                            {/* sheen sweep on hover */}
-                            <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
-                            />
-
                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                                 <h3 className="text-lg font-bold tracking-tight">{job.title}</h3>
                                 <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-white/20 px-2.5 py-0.5 text-xs leading-tight text-white/80 sm:ml-auto">
